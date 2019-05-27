@@ -7,7 +7,7 @@ The key things to remember are:
 * Mount the directory containing your template(s) to the container's /data directory
 * Mount the directory containing your variables file(s) directory
 * Pass needed env vars (any number)
-* In jour jinja2 template get OS env and your inserted env vars with ```OS_ENV.<your_env_var>```
+* In jour jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```OS_ENV.<your_env_var>```
 
 ### Supported formats
 - json
