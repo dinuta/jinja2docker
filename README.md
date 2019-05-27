@@ -11,7 +11,7 @@ The key things to remember are:
 ### Supported formats
 - json
 - yaml  
-[Integrated Jinja2 cli](#integrated-jinja2-cli )  
+[Use Jinja2 cli commands inside Docker for your other formats](#latest-updates)  
 
 ### Synthax
 docker run -i   -v <your_jinja2_template_folder>:/data \ 
@@ -66,10 +66,11 @@ Example {{yourYamlVariableHere | yamlFilter | safe }}
 ```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
 ```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
 
-The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
+The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.  
+[Check if Jinja2 cli overcomes this limitation](#latest-updates)
 
 ## Latest updates  
-#Integrated Jinja2 Cli 
+### Integrated Jinja2 Cli 
 
 https://github.com/mattrobenolt/jinja2-cli  
 
