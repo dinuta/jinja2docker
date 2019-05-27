@@ -51,9 +51,10 @@ Flavour: CentOS
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 ### Built-in filters
-yamlFilter
+yaml
 
-Example {{yourYamlVariableHere | yamlFilter | safe }}
+
+Example {{yourYamlVariableHere | yaml | safe }}
 
 
 ### Additional flexibility & base image inheritance
@@ -68,8 +69,6 @@ Example {{yourYamlVariableHere | yamlFilter | safe }}
 ```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
 
 The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
-
-[Check if Jinja2 cli overcomes this limitation](#latest-updates)
 
 ## Latest updates  
 ### Integrated Jinja2 Cli 

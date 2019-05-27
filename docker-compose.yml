@@ -5,7 +5,8 @@ services:
     image: dinutac/jinja2docker:latest
     hostname: jinja2docker
     command: tail -f /etc/alpine-release #keep the container up to use exec command from docker
+    entrypoint: ls #override
     volumes:
-      - ./templates:/data
-      - ./variables:/variables
+      - C:\Users\cdinuta\IdeaProjects\b2bi-docker-compose\automation\run\jinja2\templates:/data
+      - C:\Users\cdinuta\IdeaProjects\b2bi-docker-compose\automation\run\jinja2\variables:/variables
       - ./:/out
