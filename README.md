@@ -2,12 +2,11 @@
 
 DockerHub: https://cloud.docker.com/repository/docker/dinutac/jinja2docker  
 
-
 The key things to remember are:   
 * Mount the directory containing your template(s) to the container's /data directory
 * Mount the directory containing your variables file(s) directory
 * Pass needed env vars (any number)
-* In jour jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```OS_ENV.<your_env_var>```
+* In jour jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```environ('your_env_var')```
 
 ### Supported formats
 - json
@@ -31,7 +30,7 @@ docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \
 Os: {{os}}
 Flavour: {{flavour}}
    
-Path: {{OS_ENV.PATH}}
+Path: {{environ('PATH')}}
 ```
 
 ### Example json variables file ```variables.json```
@@ -49,6 +48,11 @@ Flavour: CentOS
 
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
+### Built-in filters
+yamlFilter
+
+Example {{yourYamlVariableHere | yamlFilter | safe }}
+
 
 ### Additional flexibility & base image inheritance
 - ! Verify the Dockerfile in order to check the python packages installed inside.
@@ -62,3 +66,13 @@ Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
 
 The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
+
+# ! Updates: Integrated jinja2-cli 
+
+https://github.com/mattrobenolt/jinja2-cli  
+
+- run the docker compose inside  ``docker-compose up``
+- run the docker exec command with the jinja2-cli params as per documentation: https://github.com/mattrobenolt/jinja2-cli  
+```
+docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose1.yml
+```

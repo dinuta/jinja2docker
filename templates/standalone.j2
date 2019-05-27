@@ -1,9 +1,9 @@
-{%- set database=databases[OS_ENV.DATABASE] -%}
-{%- set app=apps[OS_ENV.DATABASE] -%}
+{%- set database=databases[environ('DATABASE')] -%}
+{%- set app=apps[environ('DATABASE')] -%}
 
 version: '3'
 services:
-  {{OS_ENV.DATABASE}}:
+  {{environ('DATABASE')}}:
     container_name: {{database.container_name}}
     restart: {{database.restart}}
     image: {{database.image}}
@@ -13,16 +13,16 @@ services:
 
     command: {{database.command}}
     expose:
-        {{database.expose | yaml | safe | trim}}
+        {{database.expose  | safe | trim}}
     volumes:
         {%for item in database.volumes%} - {{item | trim}}
         {% endfor %}
 
   server1:
     container_name: server1
-    image: docker.swf-artifactory.lab.com/home_company/server:{{OS_ENV.app}}
+    image: docker.swf-artifactory.lab.com/home_company/server:{{environ('IMAGE')}}
     hostname: server1
-    command: -w {{OS_ENV.DATABASE}}:{{database.expose[0] | int | safe | trim}} --debug --before /init/before.sh --after /init/after.sh  --after "sudo /usr/sbin/sshd -D &"
+    command: -w {{environ('DATABASE')}}:{{database.expose[0] | int | safe | trim}} --debug --before /init/before.sh --after /init/after.sh  --after "sudo /usr/sbin/sshd -D &"
     environment:
       LicenseFile: /license/license.xml
       appSharedDirectory: /shared

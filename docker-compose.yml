@@ -1,0 +1,11 @@
+version: "3"
+services:
+  jinja2docker:
+    container_name: jinja2docker
+    image: dinutac/jinja2docker:latest
+    hostname: jinja2docker
+    command: tail -f /etc/alpine-release #keep the container up to use exec command from docker
+    volumes:
+      - ./templates:/data
+      - ./variables:/variables
+      - ./:/out

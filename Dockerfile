@@ -15,8 +15,9 @@ RUN apk add --update \
   Jinja2 \
   httplib2 \
   urllib3 \
-  ruamel_yaml \
-  simplejson
+  PyYAML \
+  simplejson \
+  jinja2-cli
 
 
 ## Cleanup
