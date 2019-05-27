@@ -10,7 +10,8 @@ The key things to remember are:
 
 ### Supported formats
 - json
-- yaml
+- yaml  
+[Integrated Jinja2 cli](#integrated-jinja2-cli )  
 
 ### Synthax
 docker run -i   -v <your_jinja2_template_folder>:/data \ 
@@ -67,12 +68,13 @@ Example {{yourYamlVariableHere | yamlFilter | safe }}
 
 The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
 
-# ! Updates: Integrated jinja2-cli 
+## Latest updates  
+#Integrated Jinja2 Cli 
 
 https://github.com/mattrobenolt/jinja2-cli  
 
 - run the docker compose inside  ``docker-compose up``
 - run the docker exec command with the jinja2-cli params as per documentation: https://github.com/mattrobenolt/jinja2-cli  
 ```
-docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose1.yml
+docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
 ```
