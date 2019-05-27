@@ -44,8 +44,8 @@ Path: {{OS_ENV.PATH}}
 
 ### Example result  
 ```json
-Os: windows
-Version: 10
+Os: Linux
+Flavour: CentOS
 
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
