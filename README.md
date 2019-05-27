@@ -1,4 +1,6 @@
-# Jinja2 docker-compose 
+# Jinja2 templating with Docker
+
+DockerHub: https://cloud.docker.com/repository/docker/dinutac/jinja2docker  
 
 
 The key things to remember are:   
