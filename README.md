@@ -42,6 +42,14 @@ Path: {{OS_ENV.PATH}}
 }
 ```
 
+### Example result  
+```json
+Os: windows
+Version: 10
+
+Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
 ### Additional flexibility & base image inheritance
 - ! Verify the Dockerfile in order to check the python packages installed inside.
 - Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
@@ -51,6 +59,6 @@ Path: {{OS_ENV.PATH}}
 - big chunks of yaml data can't be pasted into the jinja2 template files. Currently no yaml filter exists in jinja2.
  Custom yaml filter was implemented and 2 variants were tested:  
 ```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
-```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)``` - this is the current implementation, but does not keep indentations for large chunks of yaml)  
+```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
 
 The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
