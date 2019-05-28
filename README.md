@@ -83,5 +83,5 @@ docker exec jinja2docker **jinja2_cli_command**
 
 Example:  
 ```
-docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml** > docker-compose.yml
+docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
 ```
