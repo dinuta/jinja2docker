@@ -18,13 +18,13 @@ Steps:
 docker run -i   -v <your_jinja2_template_folder>:/data \ 
 -v <your_jinja2_variables_file_folder>:/variables  \
 -e TEMPLATE=<name_of_your_j2_template>.j2 -e VARIABLES=<name_of_your_variable_file> \
--e <list_of_your_env_vars> cdinuta/jinja2docker:latest > **<your_output_file>**
+-e <list_of_your_env_vars> dinutac/jinja2docker:latest > **<your_output_file>**
 
 Example: 
 ```
 docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \
 -v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables   \
--e TEMPLATE=standalone.j2 -e VARIABLES=variables.yml -e DATABASE=mysql56 cdinuta/jinja2docker:latest > docker-compose.yml
+-e TEMPLATE=standalone.j2 -e VARIABLES=variables.yml -e DATABASE=mysql56 dinutac/jinja2docker:latest > docker-compose.yml
 ```
 
 ### Example template ```json-template.j2```
