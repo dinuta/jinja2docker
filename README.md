@@ -1,6 +1,6 @@
 # Jinja2 templating with Docker
 
-DockerHub: https://cloud.docker.com/repository/docker/dinutac/jinja2docker  
+DockerHub: https://hub.docker.com/r/dinutac/jinja2docker 
 
 Steps:   
 * Mount the directory containing your template(s) to the container's **/data** directory
