@@ -3,8 +3,8 @@
 DockerHub: https://cloud.docker.com/repository/docker/dinutac/jinja2docker  
 
 The key things to remember are:   
-* Mount the directory containing your template(s) to the container's /data directory
-* Mount the directory containing your variables file(s) directory
+* Mount the directory containing your template(s) to the container's **/data** directory
+* Mount the directory containing your variables file(s) directory **/variables**
 * Pass needed env vars (any number)
 * In jour jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```environ('your_env_var')```
 
