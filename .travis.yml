@@ -3,9 +3,12 @@ language: python
 services:
   - docker
 
+env:
+  SCRIPTS_DIR: /home/dev/bin/
+
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
   - docker-compose up -d
   - sleep 10
-  - docker exec jinja2docker python3 -m unittest discover ${SCRIPTS_DIR} "*_test.py"
+  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker-compose down -v

@@ -53,7 +53,7 @@ ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
 COPY *.py /home/dev/bin/
-RUN chown -R dev:dev /home/dev && chmod 700 ${SCRIPTS_DIR}*.py
+RUN chown -R dev:dev /home/dev && chmod 700 $SCRIPTS_DIR*.py
  
 WORKDIR /data
 
