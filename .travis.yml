@@ -5,6 +5,4 @@ services:
 
 before_install:
   - docker pull dinutac/jinja2docker:latest
-
-script:
-  -
+  - docker exec jinja2docker python3 -m unittest discover ${SCRIPTS_DIR} "*_test.py"
