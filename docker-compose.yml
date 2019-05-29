@@ -4,11 +4,10 @@ services:
     container_name: jinja2docker
     image: dinutac/jinja2docker:latest
     hostname: jinja2docker
-    command: tail -f /etc/alpine-release #keep the container up to use exec command from docker
-    entrypoint: ls #override
+    entrypoint: tail -f /etc/alpine-release #keep the container up to use exec command from docker
     environment:
       limit: 'sky' #example env var inserted. you can read it with environ('limit')
     volumes:
-      - C:\Users\cdinuta\IdeaProjects\b2bi-docker-compose\automation\run\jinja2\templates:/data
-      - C:\Users\cdinuta\IdeaProjects\b2bi-docker-compose\automation\run\jinja2\variables:/variables
+      - ./templates:/data
+      - ./variables:/variables
       - ./:/out
