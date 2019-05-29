@@ -3,20 +3,21 @@ FROM alpine:latest
 ENV PUID 1000
 ENV PGID 1000
 
-RUN apk add --update \
+
+RUN apk add --update python3 && \
+    pip3 install --upgrade pip setuptools
+
+RUN apk add \
   build-base \
-  python-dev \
-  python \
   sshpass \
-  sudo \
-  py-pip && \
-  pip install --upgrade pip && \
-  pip install \
-  Jinja2 \
+  sudo
+
+RUN pip3 install \
+  PyYAML \
   httplib2 \
   urllib3 \
-  PyYAML \
   simplejson \
+  Jinja2 \
   jinja2-cli
 
 
