@@ -3,13 +3,9 @@ language: python
 services:
   - docker
 
-deploy:
+before_install:
   - docker build -t dinutac/jinja2docker:latest .
   - docker-compose up -d
   - sleep 10
-
-install:
   - docker exec jinja2docker python3 -m unittest discover ${SCRIPTS_DIR} "*_test.py"
-
-after_deploy:
   - docker-compose down -v
