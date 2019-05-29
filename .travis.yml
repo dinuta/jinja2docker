@@ -10,5 +10,7 @@ before_install:
   - docker build -t dinutac/jinja2docker:latest .
   - docker-compose up -d
   - sleep 10
+
+script:
   - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker-compose down -v
