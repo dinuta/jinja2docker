@@ -1,0 +1,46 @@
+{%- set database=databases[environ('DATABASE')] -%}
+{%- set app=apps[environ('DATABASE')] -%}
+
+version: '3'
+services:
+  {{environ('DATABASE')}}:
+    container_name: {{database.container_name}}
+    restart: {{database.restart}}
+    image: {{database.image}}
+    environment:
+        {% for item in database.environment %} {{ item | safe }}: '{{database.environment[item] }}'
+        {% endfor %}
+
+    command: {{database.command}}
+    expose:
+        {{database.expose  | safe | trim}}
+    volumes:
+        {%for item in database.volumes%} - {{item | trim}}
+        {% endfor %}
+
+  server1:
+    container_name: server1
+    image: docker.swf-artifactory.lab.com/home_company/server:{{environ('IMAGE')}}
+    hostname: server1
+    command: -w {{environ('DATABASE')}}:{{database.expose[0] | int | safe | trim}} --debug --before /init/before.sh --after /init/after.sh  --after "sudo /usr/sbin/sshd -D &"
+    environment:
+      LicenseFile: /license/license.xml
+      appSharedDirectory: /shared
+      DatabaseType: {{app.environment.DatabaseType}}
+      DBName: {{app.environment.DBName}}
+      DBServerName: {{app.environment.DBServerName}}
+      DBUserName: {{app.environment.DBUserName}}
+      DBPort: {{app.environment.DBPort}}
+      DBPassword: {{app.environment.DBPassword}}
+      DBVerify: 'true'
+#    ports:
+#      - '6443:6443'
+#      - '8089:8089'
+#      - "8800-8883:8800-8883"
+#      - '22:22'
+    expose:
+      - '6443'
+      - "5005-5025"
+      - "22"
+      - "8089"
+      - "8850-8883"
