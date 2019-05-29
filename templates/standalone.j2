@@ -10,10 +10,9 @@ services:
     environment:
         {% for item in database.environment %} {{ item | safe }}: '{{database.environment[item] }}'
         {% endfor %}
-
     command: {{database.command}}
     expose:
-        {{database.expose  | safe | trim}}
+        - '{{database.expose[0]  | safe | trim}}'
     volumes:
         {%for item in database.volumes%} - {{item | trim}}
         {% endfor %}

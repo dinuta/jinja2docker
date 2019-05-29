@@ -47,12 +47,13 @@ VOLUME ["/variables"]
 
 ENV TEMPLATES_DIR /data
 ENV VARS_DIR /variables
+ENV SCRIPTS_DIR /home/dev/bin/
 ENV OUT_DIR out
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
-COPY render.py /home/dev/bin/render.py
-RUN chown -R dev:dev /home/dev && chmod 700 /home/dev/bin/render.py
+COPY *.py /home/dev/bin/
+RUN chown -R dev:dev /home/dev && chmod 700 $SCRIPTS_DIR*.py
  
 WORKDIR /data
 

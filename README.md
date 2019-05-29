@@ -1,5 +1,7 @@
 # Jinja2 templating with Docker
 
+[![Build Status](https://travis-ci.org/dinuta/jinja2docker.svg?branch=master)](https://travis-ci.org/dinuta/jinja2docker)
+
 DockerHub: https://hub.docker.com/r/dinutac/jinja2docker 
 
 Steps:   
