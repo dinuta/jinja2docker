@@ -22,9 +22,9 @@ docker run -i   -v <your_jinja2_template_folder>:/data \
 
 Example: 
 ```
-docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \
--v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables   \
--e TEMPLATE=standalone.j2 -e VARIABLES=variables.yml -e DATABASE=mysql56 dinutac/jinja2docker:latest > docker-compose.yml
+run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \ 
+-v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables   -e TEMPLATE=standalone.j2 \ 
+-e VARIABLES=variables.yml -e DATABASE=mysql56 dinutac/jinja2docker:latest > docker-compose.yml
 ```
 
 ### Example template ```json-template.j2```
