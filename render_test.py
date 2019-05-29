@@ -12,8 +12,8 @@ class RenderTestCase(unittest.TestCase):
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
         template = yaml.load(r.rend_template("dummy"), Loader=yaml.Loader)
-
-        data = yaml.load(open(r.VARS_DIR + "/" + r.variables, closefd=True), Loader=yaml.Loader)
+        with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
+            data = yaml.load(f, Loader=yaml.Loader)
         self.assertEqual(template.get("os"), data.get("os"), )
         self.assertEqual(template.get("version"), data.get("version"))
         self.assertEqual(template.get("installed_apps"), data.get("installed_apps"))
@@ -24,8 +24,8 @@ class RenderTestCase(unittest.TestCase):
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
         template = yaml.load(r.rend_template("dummy"), Loader=yaml.Loader)
-
-        data = yaml.load(open(r.VARS_DIR + "/" + r.variables, closefd=True), Loader=yaml.Loader)
+        with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
+            data = yaml.load(f, Loader=yaml.Loader)
         self.assertEqual(template, data)
 
 
