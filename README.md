@@ -1,6 +1,6 @@
 # Jinja2 templating with Docker
 
-DockerHub: https://cloud.docker.com/repository/docker/dinutac/jinja2docker  
+DockerHub: https://hub.docker.com/r/dinutac/jinja2docker 
 
 Steps:   
 * Mount the directory containing your template(s) to the container's **/data** directory
@@ -18,7 +18,7 @@ Steps:
 docker run -i   -v <your_jinja2_template_folder>:/data \ 
 -v <your_jinja2_variables_file_folder>:/variables  \
 -e TEMPLATE=<name_of_your_j2_template>.j2 -e VARIABLES=<name_of_your_variable_file> \
--e <list_of_your_env_vars> cdinuta/jinja2:latest > **<your_output_file>**
+-e <list_of_your_env_vars> dinutac/jinja2docker:latest > **<your_output_file>**
 
 Example: 
 ```
