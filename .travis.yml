@@ -14,3 +14,16 @@ before_install:
 script:
   - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker-compose down -v
+
+  - docker run -i
+    -v $TRAVIS_BUILD_DIR/templates:/data
+    -v $TRAVIS_BUILD_DIR/variables:/variables  -e TEMPLATE=standalone.j2
+    -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
+
+  - docker run --entrypoint jinja2
+    -v $TRAVIS_BUILD_DIR/templates:/data
+    -v $TRAVIS_BUILD_DIR/variables:/variables
+    dinutac/jinja2docker:latest
+    /data/json.j2 /variables/json.json --format=json
+
+
