@@ -24,7 +24,7 @@ docker run -i   -v <your_jinja2_template_folder>:/data \
 
 Example: 
 ```
-run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \ 
+docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \ 
 -v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables   -e TEMPLATE=standalone.j2 \ 
 -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest > docker-compose.yml
 ```
@@ -73,10 +73,12 @@ Example {{yourYamlVariableHere | yaml | safe }}
 The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
 
 ## Latest updates  
+
 ### Integrated Jinja2 Cli 
 
 https://github.com/mattrobenolt/jinja2-cli  
 
+#### 1. Generate template with container up
 - run the docker compose:  ``docker-compose up``
 - run the docker exec command with the jinja2-cli params as per documentation: https://github.com/mattrobenolt/jinja2-cli  by specifying template and variables folders.
 
@@ -87,3 +89,11 @@ Example:
 ```
 docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
 ```
+
+#### 2. Hybrid call 
+```
+docker run --entrypoint jinja2   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data -v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables d
+inutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=yml
+```
+
+! observe that jinja2 is called before image name and the arguments after
