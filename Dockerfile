@@ -18,7 +18,8 @@ RUN pip3 install \
   urllib3 \
   simplejson \
   Jinja2 \
-  jinja2-cli
+  jinja2-cli \
+  flask
 
 
 ## Cleanup
