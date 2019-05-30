@@ -19,7 +19,8 @@ RUN pip3 install \
   simplejson \
   Jinja2 \
   jinja2-cli \
-  flask
+  flask \
+  jsonify
 
 
 ## Cleanup
