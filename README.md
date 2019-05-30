@@ -17,10 +17,10 @@ Steps:
 [Check Jinja2 cli commands inside Docker for other formats](#latest-updates)  
 
 ### Synthax
-docker run -i   -v <your_jinja2_template_folder>:/data \ 
--v <your_jinja2_variables_file_folder>:/variables  \
--e TEMPLATE=<name_of_your_j2_template>.j2 -e VARIABLES=<name_of_your_variable_file> \
--e <list_of_your_env_vars> dinutac/jinja2docker:latest > **<your_output_file>**
+docker run -i   -v **your_jinja2_template_folder**:/data \ 
+-v **your_jinja2_variables_file_folder**:/variables  \
+-e TEMPLATE=**filename_of_your_j2_template** -e VARIABLES=**filename_of_your_variable_file** \
+-e **list_of_your_env_vars** dinutac/jinja2docker:latest > **your_output_file**
 
 Example: 
 ```
@@ -87,7 +87,8 @@ docker exec jinja2docker **jinja2_cli_command**
 
 Example:  
 ```
-docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
+docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker \
+jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
 ```
 
 #### 2. Hybrid call 
