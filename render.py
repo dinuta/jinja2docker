@@ -13,9 +13,6 @@ import yaml
 class Render:
     TEMPLATES_DIR = os.environ.get('TEMPLATES_DIR')
     VARS_DIR = os.environ.get('VARS_DIR')
-    template = None
-    variables = None
-    env = None
 
     def __init__(self, template=None, variables=None):
         self.template = template
