@@ -92,8 +92,10 @@ docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker jinja2 /data/standa
 
 #### 2. Hybrid call 
 ```
-docker run --entrypoint jinja2   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data -v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables d
-inutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=yml
+docker run --entrypoint jinja2   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \
+-v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables \
+dinutac/jinja2docker:latest \
+/data/json.j2 /variables/json.json --format=json
 ```
 
 ! observe that jinja2 is called before image name and the arguments after
