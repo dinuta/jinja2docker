@@ -11,17 +11,12 @@ import yaml
 
 
 class Render:
-    TEMPLATES_DIR = os.environ.get('TEMPLATES_DIR')
-    VARS_DIR = os.environ.get('VARS_DIR')
-    template = None
-    variables = None
-    env = None
 
     def __init__(self, template=None, variables=None):
         self.template = template
         self.variables = variables
         self.env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(self.TEMPLATES_DIR),
+            loader=jinja2.FileSystemLoader(os.environ.get('TEMPLATES_DIR')),
             extensions=['jinja2.ext.autoescape', 'jinja2.ext.do', 'jinja2.ext.loopcontrols', 'jinja2.ext.with_'],
             autoescape=True,
             trim_blocks=True)
@@ -33,7 +28,7 @@ class Render:
         return os.getenv(key, value)
 
     def rend_template(self, argv):
-        with open(self.VARS_DIR + "/" + self.variables, closefd=True) as f:
+        with open(os.environ.get('VARS_DIR') + "/" + self.variables, closefd=True) as f:
             data = yaml.load(f, Loader=yaml.Loader)
 
         self.env.filters['yaml'] = self.yaml_filter
