@@ -1,9 +1,5 @@
 FROM alpine:latest
 
-ENV PUID 1000
-ENV PGID 1000
-
-
 RUN apk add --update python3 && \
     pip3 install --upgrade pip setuptools
 
@@ -31,19 +27,10 @@ RUN apk del \
   make && \
   rm -rf /var/cache/apk/*
 
-# create dev user
-RUN addgroup -g $PGID dev && \
-  adduser -h /config -u $PUID -H -D -G dev -s /bin/bash dev && \
-  mkdir -p /home/dev/bin && \
-  sed -ri 's/(wheel:x:10:root)/\1,dev/' /etc/group && \
-  sed -ri 's/# %wheel ALL=\(ALL\) NOPASSWD: ALL/%wheel ALL=\(ALL\) NOPASSWD: ALL/' /etc/sudoers
-  
 # Create a shared data volume
 # create an empty file, otherwise the volume will
 # belong to root.
-RUN mkdir /data/ && \
- touch /data/.extra && \
- chown -R dev:dev /data
+RUN mkdir /data/
 
 ## Expose some volumes
 VOLUME ["/data"]
@@ -57,8 +44,8 @@ ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
 ADD . $SCRIPTS_DIR/
-RUN chown -R dev:dev /home/dev && chmod +x $SCRIPTS_DIR/*.py
+RUN chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
 
-ENTRYPOINT ["python3 $SCRIPTS_DIR/main.py"]
+ENTRYPOINT ["python3", "$SCRIPTS_DIR/main.py"]
