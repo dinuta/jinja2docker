@@ -50,14 +50,14 @@ VOLUME ["/variables"]
 
 ENV TEMPLATES_DIR /data
 ENV VARS_DIR /variables
-ENV SCRIPTS_DIR /home/dev/bin/
+ENV SCRIPTS_DIR /home/dev/scripts
 ENV OUT_DIR out
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
-COPY ./* /home/dev/bin/
-RUN chown -R dev:dev /home/dev && chmod 700 $SCRIPTS_DIR*.py
+ADD . $SCRIPTS_DIR/
+RUN chown -R dev:dev /home/dev && chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
 
-ENTRYPOINT ["/home/dev/bin/main.py"]
+ENTRYPOINT ["python3 $SCRIPTS_DIR/main.py"]

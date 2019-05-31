@@ -4,7 +4,7 @@ services:
   - docker
 
 env:
-  SCRIPTS_DIR: /home/dev/bin/
+  SCRIPTS_DIR: /home/dev/scripts/
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .

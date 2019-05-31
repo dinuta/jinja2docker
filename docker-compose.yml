@@ -5,13 +5,14 @@ services:
     container_name: jinja2docker
     image: dinutac/jinja2docker:latest
     hostname: jinja2docker
-    entrypoint: python3 /home/dev/bin/main_flask.py
+    entrypoint: python3 /home/dev/scripts/main_flask.py
+#    entrypoint: tail -f /etc/alpine-release
     environment:
       limit: 'sky' #example env var inserted. you can read it with environ('limit')
     volumes:
       - ./inputs/templates:/data
       - ./inputs/variables:/variables
-      - ./:/home/dev/bin/
+      - ./:/home/dev/scripts/
     ports:
       - "5000:5000"
 

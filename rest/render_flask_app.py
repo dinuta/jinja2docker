@@ -11,7 +11,8 @@ env_vars = {
     "TEMPLATE": os.environ.get('TEMPLATE'),
     "VARIABLES": os.environ.get('VARIABLES'),
     "TEMPLATES_DIR_FILES": os.listdir(os.environ.get('TEMPLATES_DIR')),
-    "VARS_DIR_FILES": os.listdir(os.environ.get('VARS_DIR'))
+    "VARS_DIR_FILES": os.listdir(os.environ.get('VARS_DIR')),
+    "PATH": os.environ.get('PATH')
 }
 
 app = Flask(__name__)
@@ -23,6 +24,8 @@ def init_app(flask_app):
     api.init_app(blueprint)
     flask_app.register_blueprint(blueprint)
 
+
+# TODO define swagger specs
 
 @app.route('/env')
 def get_vars():
