@@ -5,12 +5,12 @@ services:
     container_name: jinja2docker
     image: dinutac/jinja2docker:latest
     hostname: jinja2docker
-    entrypoint: python3 /home/dev/bin/render_flask_app.py
+    entrypoint: python3 /home/dev/bin/main_flask.py
     environment:
       limit: 'sky' #example env var inserted. you can read it with environ('limit')
     volumes:
-      - ./templates:/data
-      - ./variables:/variables
+      - ./inputs/templates:/data
+      - ./inputs/variables:/variables
       - ./:/home/dev/bin/
     ports:
       - "5000:5000"

@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
+import os
 import unittest
 
-from render import *
+import yaml
+
+from entitities.render import Render
 
 
 class RenderTestCase(unittest.TestCase):
 
     def test_json(self):
-        os.environ['TEMPLATE'] = "json.j2";
-        os.environ['VARIABLES'] = "json.json";
+        os.environ['TEMPLATE'] = "json.j2"
+        os.environ['VARIABLES'] = "json.json"
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
         template = yaml.load(r.rend_template("dummy"), Loader=yaml.Loader)
@@ -19,8 +22,8 @@ class RenderTestCase(unittest.TestCase):
         self.assertEqual(template.get("installed_apps"), data.get("installed_apps"))
 
     def test_yml(self):
-        os.environ['TEMPLATE'] = "yml.j2";
-        os.environ['VARIABLES'] = "yml.yml";
+        os.environ['TEMPLATE'] = "yml.j2"
+        os.environ['VARIABLES'] = "yml.yml"
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
         template = yaml.load(r.rend_template("dummy"), Loader=yaml.Loader)

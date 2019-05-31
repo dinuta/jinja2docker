@@ -20,6 +20,7 @@ RUN pip3 install \
   Jinja2 \
   jinja2-cli \
   flask \
+  flask_restplus\
   jsonify
 
 
@@ -54,9 +55,9 @@ ENV OUT_DIR out
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
-COPY *.py /home/dev/bin/
+COPY ./* /home/dev/bin/
 RUN chown -R dev:dev /home/dev && chmod 700 $SCRIPTS_DIR*.py
  
 WORKDIR /data
 
-ENTRYPOINT ["/home/dev/bin/render.py"]
+ENTRYPOINT ["/home/dev/bin/main.py"]
