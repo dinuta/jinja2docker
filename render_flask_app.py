@@ -15,6 +15,8 @@ env_vars = {
     "VARS_DIR_FILES": os.listdir(os.environ.get('VARS_DIR'))
 }
 
+env_vars_list = os.environ
+
 
 @app.route('/')
 def get_vars():
@@ -39,7 +41,7 @@ def get_content_with_env(template, variables):
     os.environ['TEMPLATE'] = template
     os.environ['VARIABLES'] = variables
     for key, value in input_json.items():
-        if key not in os.environ:
+        if key not in env_vars_list:
             os.environ[key] = value
 
     r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
