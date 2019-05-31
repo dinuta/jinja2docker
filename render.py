@@ -37,10 +37,10 @@ class Render:
         self.env.globals["environ"] = lambda key: os.environ.get(key)
         self.env.globals["get_context"] = lambda: data
 
-        template = self.env.get_template(self.template)
-        sys.stdout.write(template.render(data))
+        template = self.env.get_template(self.template).render(data)
+        sys.stdout.write(template)
 
-        return template.render(data);
+        return template
 
 
 if __name__ == '__main__':
