@@ -18,7 +18,8 @@ RUN pip3 install \
   flask \
   flask_restplus\
   jsonify \
-  requests
+  requests \
+  parameterized
 
 
 ## Cleanup
