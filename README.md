@@ -24,8 +24,8 @@ docker run -i   -v **your_jinja2_template_folder**:/data \
 
 Example: 
 ```
-docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \ 
--v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables   -e TEMPLATE=standalone.j2 \ 
+docker run -i   -v C:\Users\cdinuta\IdeaProjects\jinja2docker\inputs\templates:/data \ 
+-v C:\Users\cdinuta\IdeaProjects\jinja2docker\inputs\variables:/variables   -e TEMPLATE=standalone.j2 \ 
 -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest > docker-compose.yml
 ```
 
@@ -74,7 +74,7 @@ The recommendation is either paste selectively smaller chunks of yaml or use jso
 
 ## Latest updates  
 
-### Integrated Jinja2 Cli 
+### 1. Integrated Jinja2 Cli 
 
 https://github.com/mattrobenolt/jinja2-cli  
 
@@ -94,10 +94,14 @@ jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compos
 #### 2. Hybrid call 
 ```
 docker run --entrypoint jinja2   \
--v C:\Users\cdinuta\IdeaProjects\jinja2docker\templates:/data \
--v C:\Users\cdinuta\IdeaProjects\jinja2docker\variables:/variables \
+-v C:\Users\cdinuta\IdeaProjects\jinja2docker\inputs\templates:/data \
+-v C:\Users\cdinuta\IdeaProjects\jinja2docker\inputs\variables:/variables \
 dinutac/jinja2docker:latest \
 /data/json.j2 /variables/json.json --format=json
 ```
 
 ! observe that jinja2 is called before image name and the arguments after
+
+
+### 2. Added flask restful server
+Info in wiki: https://github.com/dinuta/jinja2docker/wiki
