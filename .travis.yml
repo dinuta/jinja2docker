@@ -1,10 +1,14 @@
 language: python
 
+python:
+  - "3.7"
+
 services:
   - docker
 
 env:
   SCRIPTS_DIR: /home/dev/scripts/
+  SERVER: "127.0.0.1:5000" #not used atm
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
