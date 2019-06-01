@@ -74,7 +74,7 @@ The recommendation is either paste selectively smaller chunks of yaml or use jso
 
 ## Latest updates  
 
-### Integrated Jinja2 Cli 
+### 1. Integrated Jinja2 Cli 
 
 https://github.com/mattrobenolt/jinja2-cli  
 
@@ -101,3 +101,7 @@ dinutac/jinja2docker:latest \
 ```
 
 ! observe that jinja2 is called before image name and the arguments after
+
+
+### 2. Added flask restful server
+Info in wiki: https://github.com/dinuta/jinja2docker/wiki
