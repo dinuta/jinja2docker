@@ -48,4 +48,4 @@ RUN chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
 
-ENTRYPOINT ["python3", "$SCRIPTS_DIR/main.py"]
+ENTRYPOINT ["python3", "/home/dev/scripts/main.py"]
