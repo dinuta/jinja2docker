@@ -22,10 +22,7 @@ RUN pip3 install \
 
 
 ## Cleanup
-RUN apk del \
-  python-dev \
-  make && \
-  rm -rf /var/cache/apk/* 
+RUN rm -rf /var/cache/apk/* 
 
 # Create a shared data volume
 # create an empty file, otherwise the volume will
