@@ -1,12 +1,11 @@
-FROM alpine:latest
+FROM alpine:3.9.4
 
-RUN apk add --update python3 && \
-    pip3 install --upgrade pip setuptools
+RUN apk add --no-cache python3 && \
+    pip3 install --upgrade pip setuptools --no-cache
 
-RUN apk add \
+RUN apk add --no-cache \
   build-base \
-  sshpass \
-  sudo
+  sshpass 
 
 RUN pip3 install \
   PyYAML \
@@ -26,7 +25,7 @@ RUN pip3 install \
 RUN apk del \
   python-dev \
   make && \
-  rm -rf /var/cache/apk/*
+  rm -rf /var/cache/apk/* 
 
 # Create a shared data volume
 # create an empty file, otherwise the volume will
