@@ -1,6 +1,9 @@
 # Jinja2 templating with Docker
 
+## Build
 [![Build Status](https://travis-ci.org/dinuta/jinja2docker.svg?branch=master)](https://travis-ci.org/dinuta/jinja2docker)
+
+## Docker Hub
 [![](https://images.microbadger.com/badges/image/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own version badge on microbadger.com")
 
 [![dockeri.co](https://dockeri.co/image/dinutac/jinja2docker)](https://hub.docker.com/r/dinutac/jinja2docker)  
