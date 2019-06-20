@@ -17,7 +17,6 @@ RUN pip3 install \
   flask \
   flask_restplus\
   jsonify \
-  requests \
   parameterized
 
 

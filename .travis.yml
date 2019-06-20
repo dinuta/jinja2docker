@@ -1,19 +1,37 @@
 language: python
 
+python:
+  - "3.6"
+
 services:
   - docker
 
 env:
-  SCRIPTS_DIR: /home/dev/scripts/
-  SERVER: "127.0.0.1:5000" #not used atm
+  #scripts dir host and docker
+  SCRIPTS_DIR: tests/
+  DOCKER_SCRIPTS_DIR: /home/dev/scripts
+
+  #server on host
+  SERVER: "http://127.0.0.1:5000"
+
+  # unit tests env vars
+  TEMPLATES_DIR: inputs/templates
+  VARS_DIR: inputs/variables
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
   - docker-compose up -d
   - sleep 10
 
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - py.test $SCRIPTS_DIR/render_test.py --cov=entities
+
 script:
-  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
   - docker-compose down -v
 
   - docker run -i
@@ -26,5 +44,8 @@ script:
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
     /data/json.j2 /variables/json.json --format=json
+
+after_success:
+  - coveralls
 
 

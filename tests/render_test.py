@@ -4,7 +4,7 @@ import unittest
 
 import yaml
 
-from entitities.render import Render
+from entities.render import Render
 
 
 class RenderTestCase(unittest.TestCase):
