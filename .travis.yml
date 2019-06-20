@@ -23,7 +23,7 @@ install:
 
 script:
   - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
-  #  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  #  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR/tests/unit "*_test.py"
   - docker-compose down -v
 
   - docker run -i

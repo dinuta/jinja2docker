@@ -14,8 +14,8 @@ class FlaskServerTestCase(unittest.TestCase):
     def test_env_endpoint(self):
         response = json.loads(requests.get(self.server + "/env").text)
         self.assertEqual(len(response), 7)
-        self.assertEqual(response.get('VARS_DIR'), os.environ['VARS_DIR'])
-        self.assertEqual(response.get('TEMPLATES_DIR'), os.environ['TEMPLATES_DIR'])
+        self.assertEqual(response.get('VARS_DIR'), "/variables")
+        self.assertEqual(response.get('TEMPLATES_DIR'), "/data")
 
     @parameterized.expand([
         ("json.j2", "json.json"),
