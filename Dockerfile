@@ -16,9 +16,7 @@ RUN pip3 install \
   jinja2-cli \
   flask \
   flask_restplus\
-  jsonify \
-  requests \
-  parameterized
+  jsonify
 
 
 ## Cleanup

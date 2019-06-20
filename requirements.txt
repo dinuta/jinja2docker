@@ -1,0 +1,4 @@
+flask
+PyYAML
+requests
+parameterized

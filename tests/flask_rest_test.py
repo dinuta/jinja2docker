@@ -9,7 +9,7 @@ from parameterized import parameterized
 
 
 class FlaskServerTestCase(unittest.TestCase):
-    server = "http://0.0.0.0:5000"
+    server = os.environ.get('SERVER')
 
     def test_env_endpoint(self):
         response = json.loads(requests.get(self.server + "/env").text)

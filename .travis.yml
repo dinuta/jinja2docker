@@ -1,19 +1,25 @@
 language: python
 
+python:
+  - "3.6"
+
 services:
   - docker
 
 env:
-  SCRIPTS_DIR: /home/dev/scripts/
-  SERVER: "127.0.0.1:5000" #not used atm
+  SCRIPTS_DIR: tests/
+  SERVER: "127.0.0.1:5000"
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
   - docker-compose up -d
   - sleep 10
 
+install:
+  - pip install -r requirements.txt
+
 script:
-  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker-compose down -v
 
   - docker run -i
