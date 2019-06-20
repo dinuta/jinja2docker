@@ -1,8 +1,8 @@
 # Jinja2 templating with Docker
 
-## Build
+## Build & Coverage
 [![Build Status](https://travis-ci.org/dinuta/jinja2docker.svg?branch=master)](https://travis-ci.org/dinuta/jinja2docker)
-
+[![Coverage Status](https://coveralls.io/repos/github/dinuta/jinja2docker/badge.svg?branch=master)](https://coveralls.io/github/dinuta/jinja2docker?branch=master)
 ## Docker Hub
 https://hub.docker.com/r/dinutac/jinja2docker
 
