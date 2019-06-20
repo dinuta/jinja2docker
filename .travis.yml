@@ -8,7 +8,10 @@ services:
 
 env:
   SCRIPTS_DIR: tests/
-  SERVER: "127.0.0.1:5000"
+  SERVER: "http://127.0.0.1:5000"
+  # unit tests env vars
+  TEMPLATES_DIR: inputs/templates
+  VARS_DIR: inputs/variables
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
@@ -20,6 +23,7 @@ install:
 
 script:
   - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  #  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker-compose down -v
 
   - docker run -i
