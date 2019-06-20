@@ -7,8 +7,13 @@ services:
   - docker
 
 env:
+  #scripts dir host and docker
   SCRIPTS_DIR: tests/
+  DOCKER_SCRIPTS_DIR: /home/dev/scripts
+
+  #server on host
   SERVER: "http://127.0.0.1:5000"
+
   # unit tests env vars
   TEMPLATES_DIR: inputs/templates
   VARS_DIR: inputs/variables
@@ -23,7 +28,7 @@ install:
 
 script:
   - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
-  - docker exec jinja2docker python3 -m unittest discover $SCRIPTS_DIR/tests/unit "*_test.py"
+  - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR/tests/unit "*_test.py"
   - docker-compose down -v
 
   - docker run -i
