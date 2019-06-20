@@ -3,3 +3,4 @@ PyYAML
 requests
 parameterized
 python-coveralls
+pytest-cov
