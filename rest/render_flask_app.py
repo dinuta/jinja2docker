@@ -3,7 +3,7 @@ import os
 from flask import Flask, jsonify, request, Blueprint
 from flask_restplus import Api
 
-from entitities.render import Render
+from entities.render import Render
 
 env_vars = {
     "TEMPLATES_DIR": os.environ.get('TEMPLATES_DIR'),
