@@ -28,7 +28,7 @@ install:
 
 script:
   - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
-  - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR/tests/unit "*_test.py"
+  - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
   - docker-compose down -v
 
   - docker run -i
@@ -41,5 +41,8 @@ script:
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
     /data/json.j2 /variables/json.json --format=json
+
+#after_success:
+#  - coveralls
 
 

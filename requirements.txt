@@ -2,3 +2,4 @@ flask
 PyYAML
 requests
 parameterized
+python-coveralls
