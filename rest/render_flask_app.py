@@ -1,7 +1,7 @@
 import os
 
-from flask import Flask, jsonify, request, Blueprint
-from flask_restplus import Api
+from flask import Flask, jsonify, request
+from flask_swagger_ui import get_swaggerui_blueprint
 
 from entities.render import Render
 
@@ -15,17 +15,25 @@ env_vars = {
     "PATH": os.environ.get('PATH')
 }
 
+SWAGGER_URL = '/api/docs'
+API_URL = '/swagger/swagger.json'
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Jinja2Docker"
+    },
+)
+
 app = Flask(__name__)
-api = Api(app)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
-def init_app(flask_app):
-    blueprint = Blueprint('api', __name__, url_prefix='/api')
-    api.init_app(blueprint)
-    flask_app.register_blueprint(blueprint)
+@app.route('/swagger/swagger.json')
+def get_swagger():
+    return app.send_static_file("swagger.json")
 
-
-# TODO define swagger specs
 
 @app.route('/env')
 def get_vars():

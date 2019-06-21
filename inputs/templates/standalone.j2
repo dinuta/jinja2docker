@@ -10,6 +10,7 @@ services:
     environment:
         {% for item in database.environment %} {{ item | safe }}: '{{database.environment[item] }}'
         {% endfor %}
+
     command: {{database.command}}
     expose:
         - '{{database.expose[0]  | safe | trim}}'

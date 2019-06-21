@@ -22,7 +22,7 @@ class FlaskServerTestCase(unittest.TestCase):
         ("yml.j2", "yml.yml")
     ])
     def test_rend_endpoint(self, template, variables):
-        response = yaml.load(requests.get(self.server + f"/rend/{template}/{variables}").text)
+        response = yaml.load(requests.get(self.server + f"/rend/{template}/{variables}", Loader=yaml.Loader).text)
         self.assertEqual(len(response), 3)
 
     @parameterized.expand([
@@ -43,13 +43,17 @@ class FlaskServerTestCase(unittest.TestCase):
         response = requests.get(self.server + f"/rend/{template}/{variables}").text
         self.assertEqual(expected, response)
 
-    # @parameterized.expand([
-    #     ("standalone.j2", "variables.yml")
-    # ])
-    # def test_rendwithenv_endpoint(self, template, variables):
-    #     payload = {'DATABASE': 'mysql56', 'IMAGE': 'latest'}
-    #     response = yaml.load(requests.post(self.server + f"/rendwithenv/{template}/{variables}", data=payload).text)
-    #     self.assertEqual(len(response), 3)
+    @parameterized.expand([
+        ("standalone.j2", "variables.yml")
+    ])
+    def test_rendwithenv_endpoint(self, template, variables):
+        payload = {'DATABASE': 'mysql56', 'IMAGE': 'latest'}
+        headers = {'Content-type': 'application/json'}
+        response = yaml.load(
+            requests.post(self.server + f"/rendwithenv/{template}/{variables}", data=json.dumps(payload),
+                          headers=headers).text, Loader=yaml.Loader)
+        self.assertEqual(len(response.get("services")), 2)
+        self.assertEqual(int(response.get("version")), 3)
 
 
 if __name__ == '__main__':
