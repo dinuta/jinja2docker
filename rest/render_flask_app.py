@@ -16,7 +16,7 @@ env_vars = {
 }
 
 SWAGGER_URL = '/api/docs'
-API_URL = '/swagger/swagger.json'
+API_URL = '/swagger/swagger.yml'
 
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL,
@@ -30,9 +30,9 @@ app = Flask(__name__)
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
-@app.route('/swagger/swagger.json')
+@app.route('/swagger/swagger.yml')
 def get_swagger():
-    return app.send_static_file("swagger.json")
+    return app.send_static_file("swagger.yml")
 
 
 @app.route('/env')
