@@ -110,8 +110,11 @@ dinutac/jinja2docker:latest \
 ### 2. Added flask restful server
 Info in wiki: https://github.com/dinuta/jinja2docker/wiki
 
-#### Postman collections for flask server  
+#### Postman collections
 https://documenter.getpostman.com/view/2360061/SVYjUN7j  
+
+#### Api docs
+https://app.swaggerhub.com/apis/dinuta/jinja2docker/1.0.1  
 
 ### 3. Added kubernetes deployment for flask restful server
 Added deployment and service files for kubernetes.
