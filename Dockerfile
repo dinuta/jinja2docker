@@ -18,7 +18,8 @@ RUN pip3 install \
   flask_restplus\
   jsonify \
   parameterized \
-  flask_swagger_ui
+  flask_swagger_ui \
+  flask_cors
 
 
 ## Cleanup
