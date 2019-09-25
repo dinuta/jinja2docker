@@ -28,3 +28,6 @@ jobs:
       run: |
         pip install pytest
         pytest tests/render_test.py --cov=entities
+      env:
+        TEMPLATES_DIR: inputs/templates
+        VARS_DIR: inputs/variables
