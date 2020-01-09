@@ -5,8 +5,9 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import os
-import jinja2
 import sys
+
+import jinja2
 import yaml
 
 
@@ -31,10 +32,9 @@ class Render:
 
     def rend_template(self, argv):
         with open(self.VARS_DIR + "/" + self.variables, closefd=True) as f:
-            data = yaml.load(f, Loader=yaml.Loader)
+            data = yaml.safe_load(f)
 
         self.env.filters['yaml'] = self.yaml_filter
-        self.env.globals["environ"] = lambda key: os.environ.get(key)
         self.env.globals["get_context"] = lambda: data
 
         try:

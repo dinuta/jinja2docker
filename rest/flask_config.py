@@ -1,3 +1,3 @@
 class Config:
-    TESTING = True
-    FLASK_DEBUG = True
+    TESTING = False
+    FLASK_DEBUG = False

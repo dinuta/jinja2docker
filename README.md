@@ -9,18 +9,18 @@ https://hub.docker.com/r/dinutac/jinja2docker
 [![](https://images.microbadger.com/badges/image/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own version badge on microbadger.com") ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 Steps:   
-* Mount the directory containing your template(s) to the container's **/data** directory
-* Mount the directory containing your variables file(s) directory **/variables**
-* Pass needed env vars (any number)
-* In your jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```environ('your_env_var')```
+*  Mount the directory containing your template(s) to the container's **/data** directory
+*  Mount the directory containing your variables file(s) directory **/variables**
+*  Pass needed env vars (any number)
+*  In your jinja2 template get OS environment variables plus your inserted env vars from docker run cmd with ```environ('your_env_var')```
 
-### Supported formats
+## Supported formats
 - json
 - yaml  
 
 [Check Jinja2 cli commands inside Docker for other formats](#latest-updates)  
 
-### Synthax
+## Synthax
 docker run -i   -v **your_jinja2_template_folder**:/data \ 
 -v **your_jinja2_variables_file_folder**:/variables  \
 -e TEMPLATE=**filename_of_your_j2_template** -e VARIABLES=**filename_of_your_variable_file** \
@@ -33,7 +33,7 @@ docker run -i   -v %cd%\inputs\templates:/data \
 -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest > docker-compose.yml
 ```
 
-### Example template ```json-template.j2```
+## Example template ```json-template.j2```
 ``` txt
 Os: {{os}}
 Flavour: {{flavour}}
@@ -41,7 +41,7 @@ Flavour: {{flavour}}
 Path: {{environ('PATH')}}
 ```
 
-### Example json variables file ```variables.json```
+## Example json variables file ```variables.json```
 ```json
 {
   "os" : "Linux",
@@ -49,27 +49,27 @@ Path: {{environ('PATH')}}
 }
 ```
 
-### Example result  
+## Example result  
 ```json
 Os: Linux
 Flavour: CentOS
 
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-### Built-in filters
+## Built-in filters
 yaml
 
 
 Example {{yourYamlVariableHere | yaml | safe }}
 
 
-### Additional flexibility & base image inheritance
-- ! Verify the Dockerfile in order to check the python packages installed inside.
-- Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
-- If no support exists in the current image use this as base image and add your python packages using pip commands.
+## Additional flexibility & base image inheritance
+-  !Verify the Dockerfile in order to check the python packages installed inside.
+-  Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
+-  If no support exists in the current image use this as base image and add your python packages using pip commands.
 
-### Limitations
-- big chunks of yaml data can't be pasted into the jinja2 template files. Currently no yaml filter exists in jinja2.
+## Limitations
+-  big chunks of yaml data can't be pasted into the jinja2 template files. Currently no yaml filter exists in jinja2.
  Custom yaml filter was implemented and 2 variants were tested:  
 ```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
 ```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
@@ -82,9 +82,9 @@ The recommendation is either paste selectively smaller chunks of yaml or use jso
 
 https://github.com/mattrobenolt/jinja2-cli  
 
-#### 1. Generate template with container up
-- run the docker compose:  ``docker-compose up``
-- run the docker exec command with the jinja2-cli params as per documentation: https://github.com/mattrobenolt/jinja2-cli  by specifying template and variables folders.
+#### Generate template with container up
+-  run the docker compose:  ``docker-compose up``
+-  run the docker exec command with the jinja2-cli params as per documentation: https://github.com/mattrobenolt/jinja2-cli  by specifying template and variables folders.
 
 Synthax:  
 docker exec jinja2docker **jinja2_cli_command**  
@@ -95,7 +95,7 @@ docker exec -e DATABASE=mysql56 -e IMAGE=latest jinja2docker \
 jinja2 /data/standalone.j2 /variables/variables.yml --format=yml > docker-compose.yml
 ```
 
-#### 2. Hybrid call 
+#### Hybrid call 
 ```
 docker run --entrypoint jinja2   \
 -v %cd%\inputs\templates:/data \
@@ -104,17 +104,17 @@ dinutac/jinja2docker:latest \
 /data/json.j2 /variables/json.json --format=json
 ```
 
-! observe that jinja2 is called before image name and the arguments after
+!observe that jinja2 is called before image name and the arguments after
 
 
 ### 2. Added flask restful server
-Info in wiki: https://github.com/dinuta/jinja2docker/wiki
+[Info in wiki](https://github.com/dinuta/jinja2docker/wiki)
 
-#### Postman collections
-https://documenter.getpostman.com/view/2360061/SVYjUN7j  
+## Postman collections
+[Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)  
 
-#### Api docs
-https://app.swaggerhub.com/apis/dinuta/jinja2docker/1.0.1  
+## Api docs
+[Api docs](https://app.swaggerhub.com/apis/dinuta/jinja2docker/1.0.1)
 
-### 3. Added kubernetes deployment for flask restful server
+## 3. Added kubernetes deployment for flask restful server
 Added deployment and service files for kubernetes.
