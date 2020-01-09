@@ -1,26 +1,9 @@
-FROM alpine:3.9.4
+FROM alpine:3.10
 
-RUN apk add --no-cache python3 && \
-    pip3 install --upgrade pip setuptools --no-cache
+RUN apk add --no-cache python3
+RUN pip3 install --upgrade pip==19.3.1 setuptools==44.0.0 --no-cache
 
-RUN apk add --no-cache \
-  build-base \
-  sshpass 
-
-RUN pip3 install \
-  PyYAML \
-  httplib2 \
-  urllib3 \
-  simplejson \
-  Jinja2 \
-  jinja2-cli \
-  flask \
-  flask_restplus\
-  jsonify \
-  parameterized \
-  flask_swagger_ui \
-  flask_cors
-
+RUN apk add --no-cache build-base sshpass
 
 ## Cleanup
 RUN rm -rf /var/cache/apk/* 
@@ -41,9 +24,11 @@ ENV OUT_DIR out
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
-ADD . $SCRIPTS_DIR/
+COPY . $SCRIPTS_DIR/
 RUN chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
+
+RUN pip3 install -r $SCRIPTS_DIR/requirements.txt
 
 ENTRYPOINT ["python3", "/home/dev/scripts/main.py"]

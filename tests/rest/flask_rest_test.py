@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import os
 import unittest
 
 import requests
@@ -9,30 +8,32 @@ from parameterized import parameterized
 
 
 class FlaskServerTestCase(unittest.TestCase):
-    server = os.environ.get('SERVER')
+    server = "http://127.0.0.1:8080"
 
     def test_env_endpoint(self):
-        response = json.loads(requests.get(self.server + "/env").text)
-        self.assertEqual(len(response), 7)
-        self.assertEqual(response.get('VARS_DIR'), "/variables")
-        self.assertEqual(response.get('TEMPLATES_DIR'), "/data")
+        response = requests.get(self.server + "/env")
+        body = response.json()
+        self.assertGreaterEqual(len(body), 7)
+        self.assertEqual(body.get('VARS_DIR'), "/variables")
+        self.assertEqual(body.get('TEMPLATES_DIR'), "/data")
 
     @parameterized.expand([
         ("json.j2", "json.json"),
         ("yml.j2", "yml.yml")
     ])
-    def test_rend_endpoint(self, template, variables):
-        response = yaml.load(requests.get(self.server + f"/rend/{template}/{variables}", Loader=yaml.Loader).text)
-        self.assertEqual(len(response), 3)
+    def test_rend_endpoint_p(self, template, variables):
+        response = requests.post(self.server + f"/render/{template}/{variables}")
+        result = yaml.safe_load(response.text)
+        self.assertEqual(len(result), 3)
 
     @parameterized.expand([
         ("json.j2", "doesnotexists.json"),
         ("yml.j2", "doesnotexists.yml")
     ])
-    def test_rend_endpoint(self, template, variables):
+    def test_rend_endpoint_doesnotexist(self, template, variables):
         expected = f"Exception([Errno 2] No such file or directory: \'/variables/{variables}\')"
-        response = requests.get(self.server + f"/rend/{template}/{variables}").text
-        self.assertEqual(expected, response)
+        response = requests.post(self.server + f"/render/{template}/{variables}")
+        self.assertEqual(expected, response.text)
 
     @parameterized.expand([
         ("doesnotexists.j2", "json.json"),
@@ -40,8 +41,8 @@ class FlaskServerTestCase(unittest.TestCase):
     ])
     def test_rend_endpoint(self, template, variables):
         expected = f"Exception({template})"
-        response = requests.get(self.server + f"/rend/{template}/{variables}").text
-        self.assertEqual(expected, response)
+        response = requests.post(self.server + f"/render/{template}/{variables}")
+        self.assertEqual(expected, response.text)
 
     @parameterized.expand([
         ("standalone.j2", "variables.yml")
@@ -49,11 +50,11 @@ class FlaskServerTestCase(unittest.TestCase):
     def test_rendwithenv_endpoint(self, template, variables):
         payload = {'DATABASE': 'mysql56', 'IMAGE': 'latest'}
         headers = {'Content-type': 'application/json'}
-        response = yaml.load(
-            requests.post(self.server + f"/rendwithenv/{template}/{variables}", data=json.dumps(payload),
-                          headers=headers).text, Loader=yaml.Loader)
-        self.assertEqual(len(response.get("services")), 2)
-        self.assertEqual(int(response.get("version")), 3)
+        response = requests.post(self.server + f"/render/{template}/{variables}", data=json.dumps(payload),
+                                 headers=headers)
+        body = yaml.safe_load(response.text)
+        self.assertEqual(len(body.get("services")), 2)
+        self.assertEqual(int(body.get("version")), 3)
 
 
 if __name__ == '__main__':

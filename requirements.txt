@@ -4,3 +4,12 @@ requests
 parameterized
 python-coveralls
 pytest-cov
+httplib2
+urllib3
+simplejson
+Jinja2
+jinja2-cli
+flask_restplus
+jsonify
+flask_swagger_ui
+flask_cors
