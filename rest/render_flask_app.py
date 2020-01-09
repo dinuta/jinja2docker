@@ -40,13 +40,15 @@ def get_vars():
 
 @app.route('/render/<template>/<variables>', methods=['POST'])
 def get_content_with_env(template, variables):
-    input_json = request.get_json(force=True)
     os.environ['TEMPLATE'] = template
     os.environ['VARIABLES'] = variables
-    for key, value in input_json.items():
-        if key not in unmodifiable_env_vars:
-            os.environ[key] = value
-
+    try:
+        input_json = request.get_json(force=True)
+        for key, value in input_json.items():
+            if key not in unmodifiable_env_vars:
+                os.environ[key] = value
+    except:
+        pass
     r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
     try:
         result = r.rend_template("dummy")
