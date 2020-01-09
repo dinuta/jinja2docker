@@ -31,29 +31,7 @@ paths:
       responses:
         200:
           description: List of env vars in key value pairs
-  /rend/{template}/{variables}:
-    get:
-      tags:
-        - jinja2
-      summary: Jinja2 rend output
-      description: Gets the rendered output from template and variable files with Jinja2
-      produces:
-        - application/json
-      parameters:
-        - name: template
-          in: path
-          description: The template file mounted in docker
-          required: true
-          type: string
-        - name: variables
-          in: path
-          description: The variables file mounted in docker
-          required: true
-          type: string
-      responses:
-        200:
-          description: Jinja2 rendered template or the exception which occured.
-  /rendwithenv/{template}/{variables}:
+  /render/{template}/{variables}:
     post:
       tags:
         - jinja2

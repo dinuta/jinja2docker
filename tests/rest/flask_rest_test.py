@@ -22,7 +22,7 @@ class FlaskServerTestCase(unittest.TestCase):
         ("yml.j2", "yml.yml")
     ])
     def test_rend_endpoint_p(self, template, variables):
-        response = yaml.safe_load(requests.get(self.server + f"/render/{template}/{variables}").text)
+        response = yaml.safe_load(requests.post(self.server + f"/render/{template}/{variables}").text)
         self.assertEqual(len(response), 3)
 
     @parameterized.expand([
@@ -31,7 +31,7 @@ class FlaskServerTestCase(unittest.TestCase):
     ])
     def test_rend_endpoint_doesnotexist(self, template, variables):
         expected = f"Exception([Errno 2] No such file or directory: \'/variables/{variables}\')"
-        response = requests.get(self.server + f"/render/{template}/{variables}").text
+        response = requests.post(self.server + f"/render/{template}/{variables}").text
         self.assertEqual(expected, response)
 
     @parameterized.expand([
@@ -40,7 +40,7 @@ class FlaskServerTestCase(unittest.TestCase):
     ])
     def test_rend_endpoint(self, template, variables):
         expected = f"Exception({template})"
-        response = requests.get(self.server + f"/render/{template}/{variables}").text
+        response = requests.post(self.server + f"/render/{template}/{variables}").text
         self.assertEqual(expected, response)
 
     @parameterized.expand([

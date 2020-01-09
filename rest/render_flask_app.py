@@ -38,7 +38,7 @@ def get_vars():
     return jsonify(dict(os.environ)), 200
 
 
-@app.route('/render/<template>/<variables>', methods=['GET', 'POST'])
+@app.route('/render/<template>/<variables>', methods=['POST'])
 def get_content_with_env(template, variables):
     input_json = request.get_json(force=True)
     os.environ['TEMPLATE'] = template
