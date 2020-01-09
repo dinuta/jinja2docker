@@ -29,6 +29,6 @@ RUN chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r $SCRIPTS_DIR/requirements.txt
 
 ENTRYPOINT ["python3", "/home/dev/scripts/main.py"]
