@@ -5,21 +5,6 @@ RUN pip3 install --upgrade pip==19.3.1 setuptools==44.0.0 --no-cache
 
 RUN apk add --no-cache build-base sshpass
 
-RUN pip3 install \
-  PyYAML \
-  httplib2 \
-  urllib3 \
-  simplejson \
-  Jinja2 \
-  jinja2-cli \
-  flask \
-  flask_restplus\
-  jsonify \
-  parameterized \
-  flask_swagger_ui \
-  flask_cors
-
-
 ## Cleanup
 RUN rm -rf /var/cache/apk/* 
 
@@ -43,5 +28,7 @@ COPY . $SCRIPTS_DIR/
 RUN chmod +x $SCRIPTS_DIR/*.py
  
 WORKDIR /data
+
+RUN pip3 install -r requirements.txt
 
 ENTRYPOINT ["python3", "/home/dev/scripts/main.py"]
