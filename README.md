@@ -114,7 +114,7 @@ dinutac/jinja2docker:latest \
 [Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)  
 
 ## Api docs
-[Api docs](https://app.swaggerhub.com/apis/dinuta/jinja2docker/1.0.1)
+/api/docs
 
 ## 3. Added kubernetes deployment for flask restful server
 Added deployment and service files for kubernetes.
