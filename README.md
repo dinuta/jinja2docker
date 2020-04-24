@@ -22,10 +22,13 @@ Steps:
 [Check Jinja2 cli commands for other formats](#latest-updates)  
 
 ## Synthax
+
+```bash
 docker run --rm -i -v **TEMPLATE_FOLDER**:/data \ 
 -v **VARIABLES_FOLDER**:/variables  \
 -e TEMPLATE=**TEMPLATE_FILE** -e VARIABLES=**VARIABLES_FILE** -e **CUSTOM_ENV_VAR** \
 dinutac/jinja2docker:latest > **OUTPUT_FILE**
+```
 
 Example: 
 ```
@@ -82,8 +85,8 @@ The recommendation is either paste selectively smaller chunks of yaml or use jso
 
 https://github.com/mattrobenolt/jinja2-cli  
 
-```
-docker run -v $PWD\inputs\templates:/data -v $PWD\inputs\variables:/variables --entrypoint jinja2 \
+```bash
+docker run --rm -v $PWD\inputs\templates:/data -v $PWD\inputs\variables:/variables --entrypoint jinja2 \
 dinutac/jinja2docker:latest \
 /data/json.j2 /variables/json.json --format=json
 ```

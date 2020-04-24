@@ -1,7 +1,7 @@
-FROM alpine:3.10
+FROM alpine:3.11
 
 RUN apk add --no-cache python3
-RUN pip3 install --upgrade pip==19.3.1 setuptools==44.0.0 --no-cache
+RUN pip3 install --upgrade pip==20.0.2 setuptools==46.1.3 --no-cache
 
 RUN apk add --no-cache build-base sshpass
 
@@ -9,8 +9,6 @@ RUN apk add --no-cache build-base sshpass
 RUN rm -rf /var/cache/apk/* 
 
 # Create a shared data volume
-# create an empty file, otherwise the volume will
-# belong to root.
 RUN mkdir /data/
 
 ## Expose some volumes
