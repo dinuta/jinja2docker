@@ -1,5 +1,9 @@
-flask
 PyYAML
+toml
+xmltodict
+jinja2-cli
+
+flask
 requests
 parameterized
 python-coveralls
@@ -8,7 +12,6 @@ httplib2
 urllib3
 simplejson
 Jinja2
-jinja2-cli
 flask_restplus
 jsonify
 flask_swagger_ui
