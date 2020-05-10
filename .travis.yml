@@ -43,6 +43,12 @@ script:
     dinutac/jinja2docker:latest
     /data/json.j2 /variables/json.json --format=json
 
+  - docker run --entrypoint jinja2
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
+    dinutac/jinja2docker:latest
+    /data/yml.j2 /variables/yml.yml --format=yaml
+
 after_success:
   - coveralls
 

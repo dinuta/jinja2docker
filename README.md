@@ -77,7 +77,7 @@ Example {{yourYamlVariableHere | yaml | safe }}
 ```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
 ```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
 
-The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible.
+The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible, or use [jinja2-cli](#latest-updates) embedded in this docker image.  
 
 ## Latest updates  
 
@@ -101,6 +101,7 @@ dinutac/jinja2docker:latest /data/standalone.j2 /variables/variables.yml --forma
 ```
 
 ### 2. Added flask restful server
+
 [Info in wiki](https://github.com/dinuta/jinja2docker/wiki)  
 [Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)    
   
