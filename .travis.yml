@@ -28,7 +28,7 @@ before_script:
   - py.test $SCRIPTS_DIR/render_test.py --cov=entities
 
 script:
-  - python3 -m unittest discover $SCRIPTS_DIR/tests "*_test.py"
+  - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
   - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
   - docker-compose down -v
 
