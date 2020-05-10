@@ -21,7 +21,7 @@ Check [jinja2-cli](#latest-updates) commands for all supported formats.
 
 ## Supported formats (embedded custom render)
 
-If you want to use the custom embedded render you must override the entrypoint to ```/scripts/entities/render.py```
+If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```
 
 ## Syntax
 
@@ -75,13 +75,12 @@ Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 ## Custom jinja2 render
--  ! Verify the Dockerfile in order to check the python packages installed inside.
 -  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
--  If no support exists in the current image use this as base image and add your needed python packages
+-  Verify the Dockerfile and add the needed python packages.
 
-## Latest updates  
+# Latest updates  
 
-### 1. Added flask restful server
+### Added flask restful server
 
 [Info in wiki](https://github.com/dinuta/jinja2docker/wiki)  
 [Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)    
