@@ -49,6 +49,19 @@ script:
     dinutac/jinja2docker:latest
     /data/yml.j2 /variables/yml.yml --format=yaml
 
+deploy:
+  - provider: script
+    script: bash docker_push_tag.sh
+    skip_cleanup: true
+    on:
+      tags: true
+
+  - provider: script
+    script: bash docker_push_master.sh
+    skip_cleanup: true
+    on:
+      branch: master
+
 after_success:
   - coveralls
 

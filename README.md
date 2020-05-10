@@ -19,7 +19,7 @@ Steps:
 - json
 - yaml  
 
-[Check Jinja2 cli commands for other formats](#latest-updates)  
+Check [jinja2-cli](#latest-updates) commands for other formats.  
 
 ## Synthax
 
