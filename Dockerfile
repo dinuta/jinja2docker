@@ -23,7 +23,7 @@ ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
 COPY . $SCRIPTS_DIR/
-RUN chmod +x $SCRIPTS_DIR/*.py
+RUN chmod +x $SCRIPTS_DIR/entities/*.py
  
 WORKDIR /data
 
