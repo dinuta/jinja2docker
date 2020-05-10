@@ -17,7 +17,7 @@ Steps:
 
 ## Supported formats (default)
 
-Check [jinja2-cli](#latest-updates) commands for all supported formats.  
+Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
 ## Supported formats (embedded custom render)
 
