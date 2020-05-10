@@ -71,7 +71,7 @@ Example {{yourYamlVariableHere | yaml | safe }}
 -  Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
 -  If no support exists in the current image use this as base image and add your needed python packages
 
-## Limitations
+## Limitations (embedded render)
 -  big chunks of yaml data can't be pasted into the jinja2 template files. Currently no yaml filter exists in jinja2.
  Custom yaml filter was implemented and 2 variants were tested:  
 ```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
