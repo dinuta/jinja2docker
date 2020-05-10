@@ -1,7 +1,7 @@
 FROM alpine:3.11
 
 RUN apk add --no-cache python3
-RUN pip3 install --upgrade pip==20.0.2 setuptools==46.1.3 --no-cache
+RUN pip3 install --upgrade pip==20.1 setuptools==46.1.3 --no-cache
 
 RUN apk add --no-cache build-base sshpass
 
@@ -29,4 +29,4 @@ WORKDIR /data
 
 RUN pip3 install -r $SCRIPTS_DIR/requirements.txt
 
-ENTRYPOINT ["python3", "/scripts/entities/render.py"]
+ENTRYPOINT ["jinja2"]

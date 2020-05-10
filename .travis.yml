@@ -28,22 +28,24 @@ before_script:
   - py.test $SCRIPTS_DIR/render_test.py --cov=entities
 
 script:
-  - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
+  - python3 -m unittest discover $SCRIPTS_DIR/tests "*_test.py"
   - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
   - docker-compose down -v
 
-  - docker run -i
+  #override entrypoint for custom render
+  - docker run --rm --entrypoint /scripts/entities/render.py
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
     -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
 
-  - docker run --entrypoint jinja2
+  #default render is jinja2-cli
+  - docker run --rm
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
     /data/json.j2 /variables/json.json --format=json
 
-  - docker run --entrypoint jinja2
+  - docker run --rm
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
