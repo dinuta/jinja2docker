@@ -17,7 +17,7 @@ VOLUME ["/variables"]
 
 ENV TEMPLATES_DIR /data
 ENV VARS_DIR /variables
-ENV SCRIPTS_DIR /home/dev/scripts
+ENV SCRIPTS_DIR /scripts
 ENV OUT_DIR out
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
@@ -29,4 +29,4 @@ WORKDIR /data
 
 RUN pip3 install -r $SCRIPTS_DIR/requirements.txt
 
-ENTRYPOINT ["python3", "/home/dev/scripts/main.py"]
+ENTRYPOINT ["python3", "/scripts/entities/render.py"]

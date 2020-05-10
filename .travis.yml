@@ -9,7 +9,7 @@ services:
 env:
   #scripts dir host and docker
   SCRIPTS_DIR: tests/
-  DOCKER_SCRIPTS_DIR: /home/dev/scripts
+  DOCKER_SCRIPTS_DIR: /scripts
 
   # unit tests env vars
   TEMPLATES_DIR: inputs/templates

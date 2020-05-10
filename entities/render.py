@@ -5,8 +5,9 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 import os
-import jinja2
 import sys
+
+import jinja2
 import yaml
 
 
@@ -44,3 +45,8 @@ class Render:
         sys.stdout.write(template)
 
         return template
+
+
+if __name__ == '__main__':
+    render = Render(os.environ.get('TEMPLATE'), os.environ.get('VARIABLES'))
+    render.rend_template(sys.argv[1:])

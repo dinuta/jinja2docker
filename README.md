@@ -68,7 +68,7 @@ Example {{yourYamlVariableHere | yaml | safe }}
 
 ## Additional flexibility & base image inheritance
 -  ! Verify the Dockerfile in order to check the python packages installed inside.
--  Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
+-  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
 -  If no support exists in the current image use this as base image and add your needed python packages
 
 ## Limitations (embedded render)
