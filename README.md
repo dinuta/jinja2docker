@@ -19,10 +19,6 @@ Steps:
 
 Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
-## Supported formats (embedded custom render)
-
-If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```
-
 ## Syntax
 
 ```bash
@@ -50,7 +46,8 @@ docker run --rm
 dinutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=json
 ```
 
-## Example template ```json-template.j2```
+## Templating example
+**template.json**
 ``` txt
 Os: {{os}}
 Flavour: {{flavour}}
@@ -58,7 +55,7 @@ Flavour: {{flavour}}
 Path: {{environ('PATH')}}
 ```
 
-## Example json variables file ```variables.json```
+**variables.json**
 ```json
 {
   "os" : "Linux",
@@ -66,7 +63,8 @@ Path: {{environ('PATH')}}
 }
 ```
 
-## Example result  
+## Templating result  
+**result.json**
 ```json
 Os: Linux
 Flavour: CentOS
@@ -74,8 +72,14 @@ Flavour: CentOS
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
+## Embedded custom render
+
+If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```. It supports:
+-  yaml
+-  json
+
 ## Write your own custom render
-There is an embedded custom render, but if you want to write your own:
+If you want to write your own custom jinja2 render:
 
 -  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
 -  Verify the Dockerfile and add the needed python packages (requirements.txt).
