@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
 
@@ -35,7 +35,7 @@ def get_swagger():
 
 @app.route('/env')
 def get_vars():
-    return jsonify(dict(os.environ)), 200
+    return dict(os.environ), 200
 
 
 @app.route('/render/<template>/<variables>', methods=['POST'])

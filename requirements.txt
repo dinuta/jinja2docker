@@ -1,18 +1,9 @@
-PyYAML
-toml
-xmltodict
-jinja2-cli
+jinja2-cli[yaml,toml,xml]
 
 flask
 requests
 parameterized
 python-coveralls
 pytest-cov
-httplib2
-urllib3
-simplejson
-Jinja2
-flask_restplus
-jsonify
 flask_swagger_ui
 flask_cors
