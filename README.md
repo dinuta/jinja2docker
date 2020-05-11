@@ -15,29 +15,39 @@ Steps:
 *  Pass needed env vars (any number)
 *  In your jinja2 template get OS environment variables plus your inserted environment vars with ```environ('your_env_var')```
 
-## Supported formats (embedded render)
-- json
-- yaml  
+## Supported formats (default)
 
-Check [jinja2-cli](#latest-updates) commands for other formats.  
+Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
-## Synthax
+## Syntax
 
 ```bash
-docker run --rm -i -v **TEMPLATE_FOLDER**:/data \ 
+docker run --rm \
+-v **TEMPLATE_FOLDER**:/data \ 
 -v **VARIABLES_FOLDER**:/variables  \
--e TEMPLATE=**TEMPLATE_FILE** -e VARIABLES=**VARIABLES_FILE** -e **CUSTOM_ENV_VAR** \
-dinutac/jinja2docker:latest > **OUTPUT_FILE**
+-e CUSTOM_ENV_VAR=**VALUE** \
+dinutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=json > **OUTPUT_FILE**
 ```
 
-Example: 
-```
-docker run --rm -i -v $PWD\inputs\templates:/data -v $PWD\inputs\variables:/variables \
--e TEMPLATE=standalone.j2 -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest \
-dinutac/jinja2docker:latest > docker-compose.yml
+Example 1: 
+```bash
+docker run --rm 
+-v $PWD\inputs\templates:/data 
+-v $PWD\inputs\variables:/variables \
+-e DATABASE=mysql56 -e IMAGE=latest \
+dinutac/jinja2docker:latest /data/standalone.j2 /variables/variables.yml --format=yaml > docker-compose.yml
 ```
 
-## Example template ```json-template.j2```
+Example 2:
+```bash
+docker run --rm 
+-v $PWD\inputs\templates:/data 
+-v $PWD\inputs\variables:/variables
+dinutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=json
+```
+
+## Templating example
+**template.json**
 ``` txt
 Os: {{os}}
 Flavour: {{flavour}}
@@ -45,7 +55,7 @@ Flavour: {{flavour}}
 Path: {{environ('PATH')}}
 ```
 
-## Example json variables file ```variables.json```
+**variables.json**
 ```json
 {
   "os" : "Linux",
@@ -53,54 +63,30 @@ Path: {{environ('PATH')}}
 }
 ```
 
-## Example result  
+## Templating result  
+**result.json**
 ```json
 Os: Linux
 Flavour: CentOS
 
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-## Built-in filters
-yaml
 
+## Embedded custom render
 
-Example {{yourYamlVariableHere | yaml | safe }}
+If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```. It supports:
+-  yaml
+-  json
 
-## Additional flexibility & base image inheritance
--  ! Verify the Dockerfile in order to check the python packages installed inside.
--  Override the ```render.py``` file (you must use this file name) in /home/dev/bin/ in order to execute your own logic.
--  If no support exists in the current image use this as base image and add your needed python packages
+## Write your own custom render
+If you want to write your own custom jinja2 render:
 
-## Limitations (embedded render)
--  big chunks of yaml data can't be pasted into the jinja2 template files. Currently no yaml filter exists in jinja2.
- Custom yaml filter was implemented and 2 variants were tested:  
-```yaml.dump(value, sys.stdout, Dumper=yaml.RoundTripDumper, indent=4)``` tested, keeps indentations but does not glue yaml chunk where needed)  
-```yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)```  this is the current implementation, but does not keep indentations for large chunks of yaml)  
+-  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
+-  Verify the Dockerfile and add the needed python packages (requirements.txt).
 
-The recommendation is either paste selectively smaller chunks of yaml or use json whenever possible, or use [jinja2-cli](#latest-updates) embedded in this docker image.  
+# Latest updates  
 
-## Latest updates  
-
-### 1. Integrated Jinja2 Cli 
-
-https://github.com/mattrobenolt/jinja2-cli  
-
-```bash
-docker run --rm -v $PWD\inputs\templates:/data -v $PWD\inputs\variables:/variables --entrypoint jinja2 \
-dinutac/jinja2docker:latest \
-/data/json.j2 /variables/json.json --format=json
-```
-
-! observe that jinja2 is called before image name and the arguments after
-
-Example:  
-```
-docker run --rm -v $PWD/inputs/templates:/data -v $PWD/inputs/variables:/variables \ 
--e DATABASE=mysql56 -e IMAGE=latest --entrypoint jinja2 \
-dinutac/jinja2docker:latest /data/standalone.j2 /variables/variables.yml --format=yml
-```
-
-### 2. Added flask restful server
+### Added flask restful server
 
 [Info in wiki](https://github.com/dinuta/jinja2docker/wiki)  
 [Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)    

@@ -9,7 +9,7 @@ services:
 env:
   #scripts dir host and docker
   SCRIPTS_DIR: tests/
-  DOCKER_SCRIPTS_DIR: /home/dev/scripts
+  DOCKER_SCRIPTS_DIR: /scripts
 
   # unit tests env vars
   TEMPLATES_DIR: inputs/templates
@@ -32,18 +32,27 @@ script:
   - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
   - docker-compose down -v
 
-  - docker run -i
+  #override entrypoint for custom render
+  - docker run --rm --entrypoint /scripts/entities/render.py
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
     -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
 
-  - docker run --entrypoint jinja2
+  #default render is jinja2-cli
+  - docker run --rm
+    -e DATABASE=mysql56 -e IMAGE=latest
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
+    dinutac/jinja2docker:latest
+    /data/standalone.j2 /variables/variables.yml --format=yml
+
+  - docker run --rm
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
     /data/json.j2 /variables/json.json --format=json
 
-  - docker run --entrypoint jinja2
+  - docker run --rm
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
