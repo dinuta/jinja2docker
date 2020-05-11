@@ -40,6 +40,13 @@ script:
 
   #default render is jinja2-cli
   - docker run --rm
+    -e DATABASE=mysql56 -e IMAGE=latest
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
+    dinutac/jinja2docker:latest
+    /data/standalone.j2 /variables/variables.yml --format=yml
+
+  - docker run --rm
     -v $TRAVIS_BUILD_DIR/inputs/templates:/data
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
