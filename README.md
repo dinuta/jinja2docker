@@ -74,9 +74,11 @@ Flavour: CentOS
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
-## Custom jinja2 render
+## Write your own custom render
+There is an embedded custom render, but if you want to write your own:
+
 -  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
--  Verify the Dockerfile and add the needed python packages.
+-  Verify the Dockerfile and add the needed python packages (requirements.txt).
 
 # Latest updates  
 
