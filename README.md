@@ -78,6 +78,14 @@ If you want to use the custom embedded render you must override the entrypoint w
 -  yaml
 -  json
 
+Example:
+```bash
+docker run --rm --entrypoint /scripts/entities/render.py
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
+    -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
+```
+
 ## Write your own custom render
 If you want to write your own custom jinja2 render:
 
