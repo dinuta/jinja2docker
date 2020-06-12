@@ -30,7 +30,7 @@ class Render:
     def env_override(self, value, key):
         return os.getenv(key, value)
 
-    def rend_template(self, argv):
+    def rend_template(self):
         with open(self.VARS_DIR + "/" + self.variables, closefd=True) as f:
             data = yaml.safe_load(f)
 
@@ -48,4 +48,4 @@ class Render:
 
 
 if __name__ == '__main__':
-    Render(os.environ.get('TEMPLATE'), os.environ.get('VARIABLES')).rend_template(sys.argv[1:])
+    Render(os.environ.get('TEMPLATE'), os.environ.get('VARIABLES')).rend_template()

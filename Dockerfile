@@ -21,8 +21,8 @@ ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
 
 # Copy extra scripts: embedded render and main flask service
-COPY entities/render.py $SCRIPTS_DIR/entities
-COPY main_flask.py $SCRIPTS_DIR
+COPY entities/render.py $SCRIPTS_DIR/entities/render.py
+COPY main_flask.py $SCRIPTS_DIR/main_flask.py
 
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
 RUN chmod +x $SCRIPTS_DIR/main_flask.py
