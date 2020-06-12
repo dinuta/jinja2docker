@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.11
 
 # Install python3 and other deps
 RUN apk add --no-cache python3
