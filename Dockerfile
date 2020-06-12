@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.12
 
 # Install python3 and other deps
 RUN apk add --no-cache python3
@@ -23,6 +23,7 @@ ENV VARIABLES variables.yml
 # Copy extra scripts: embedded render and main flask service
 COPY entities/render.py $SCRIPTS_DIR/entities/render.py
 COPY main_flask.py $SCRIPTS_DIR/main_flask.py
+COPY requirements.txt $SCRIPTS_DIR/requirements.txt
 
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
 RUN chmod +x $SCRIPTS_DIR/main_flask.py
