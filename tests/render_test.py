@@ -14,7 +14,7 @@ class RenderTestCase(unittest.TestCase):
         os.environ['VARIABLES'] = "json.json"
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
-        template = yaml.safe_load(r.rend_template("dummy"))
+        template = yaml.safe_load(r.rend_template())
         with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
             data = yaml.safe_load(f)
         self.assertEqual(template.get("os"), data.get("os"), )
@@ -26,7 +26,7 @@ class RenderTestCase(unittest.TestCase):
         os.environ['VARIABLES'] = "yml.yml"
         r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
 
-        template = yaml.safe_load(r.rend_template("dummy"))
+        template = yaml.safe_load(r.rend_template())
         with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
             data = yaml.safe_load(f)
         self.assertEqual(template, data)
