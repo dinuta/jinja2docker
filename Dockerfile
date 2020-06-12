@@ -2,7 +2,7 @@ FROM alpine:3.12
 
 # Install python3 and other deps
 RUN apk add --no-cache python3
-RUN pip3 install --upgrade pip==20.1.1 setuptools==47.1.1 --no-cache
+RUN pip3 install pip==20.1.1 setuptools==47.1.1 --no-cache
 RUN apk add --no-cache build-base sshpass
 
 # Create folders
