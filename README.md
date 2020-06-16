@@ -10,7 +10,7 @@ https://hub.docker.com/r/dinutac/jinja2docker
 [![](https://images.microbadger.com/badges/image/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own version badge on microbadger.com") ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 Steps:   
-*  Mount the directory containing your template(s) to the container's **/data** directory
+*  Mount the directory containing your template(s) to the container's **/templates** directory
 *  Mount the directory containing your variables file(s) directory **/variables**
 *  Pass needed env vars (any number)
 *  In your jinja2 template get OS environment variables plus your inserted environment vars with ```environ('your_env_var')```
@@ -23,27 +23,27 @@ Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all 
 
 ```bash
 docker run --rm \
--v **TEMPLATE_FOLDER**:/data \ 
+-v **TEMPLATE_FOLDER**:/templates \ 
 -v **VARIABLES_FOLDER**:/variables  \
 -e CUSTOM_ENV_VAR=**VALUE** \
-dinutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=json > **OUTPUT_FILE**
+dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=json > **OUTPUT_FILE**
 ```
 
 Example 1: 
 ```bash
 docker run --rm 
--v $PWD\inputs\templates:/data 
+-v $PWD\inputs\templates:/templates 
 -v $PWD\inputs\variables:/variables \
 -e DATABASE=mysql56 -e IMAGE=latest \
-dinutac/jinja2docker:latest /data/standalone.j2 /variables/variables.yml --format=yaml > docker-compose.yml
+dinutac/jinja2docker:latest /templates/standalone.j2 /variables/variables.yml --format=yaml > docker-compose.yml
 ```
 
 Example 2:
 ```bash
 docker run --rm 
--v $PWD\inputs\templates:/data 
+-v $PWD\inputs\templates:/templates 
 -v $PWD\inputs\variables:/variables
-dinutac/jinja2docker:latest /data/json.j2 /variables/json.json --format=json
+dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=json
 ```
 
 ## Templating example
@@ -81,7 +81,7 @@ If you want to use the custom embedded render you must override the entrypoint w
 Example:
 ```bash
 docker run --rm --entrypoint /scripts/entities/render.py
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
     -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
 ```
