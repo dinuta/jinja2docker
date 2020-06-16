@@ -15,7 +15,7 @@ class FlaskServerTestCase(unittest.TestCase):
         body = response.json()
         self.assertGreaterEqual(len(body), 7)
         self.assertEqual(body.get('VARS_DIR'), "/variables")
-        self.assertEqual(body.get('TEMPLATES_DIR'), "/data")
+        self.assertEqual(body.get('TEMPLATES_DIR'), "/templates")
 
     @parameterized.expand([
         ("json.j2", "json.json"),

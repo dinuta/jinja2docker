@@ -6,16 +6,16 @@ RUN pip3 install pip==20.1.1 setuptools==47.1.1 --no-cache
 RUN apk add --no-cache build-base sshpass
 
 # Create folders
-RUN mkdir /data/
+RUN mkdir /templates/
 RUN mkdir /variables/
 
 # Expose some volumes
-VOLUME ["/data"]
+VOLUME ["/templates"]
 VOLUME ["/variables"]
 
 # Set needed env vars
 ENV SCRIPTS_DIR /scripts
-ENV TEMPLATES_DIR /data
+ENV TEMPLATES_DIR /templates
 ENV VARS_DIR /variables
 ENV TEMPLATE docker-compose.j2
 ENV VARIABLES variables.yml
@@ -28,7 +28,7 @@ COPY requirements.txt $SCRIPTS_DIR/requirements.txt
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
 RUN chmod +x $SCRIPTS_DIR/main_flask.py
 
-WORKDIR /data
+WORKDIR /templates
 
 RUN pip3 install -r $SCRIPTS_DIR/requirements.txt
 

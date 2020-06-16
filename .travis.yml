@@ -34,29 +34,29 @@ script:
 
   #override entrypoint for custom render
   - docker run --rm --entrypoint /scripts/entities/render.py
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
     -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
 
   #default render is jinja2-cli
   - docker run --rm
     -e DATABASE=mysql56 -e IMAGE=latest
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
-    /data/standalone.j2 /variables/variables.yml --format=yml
+    /templates/standalone.j2 /variables/variables.yml --format=yml
 
   - docker run --rm
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
-    /data/json.j2 /variables/json.json --format=json
+    /templates/json.j2 /variables/json.json --format=json
 
   - docker run --rm
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/data
+    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
     dinutac/jinja2docker:latest
-    /data/yml.j2 /variables/yml.yml --format=yaml
+    /templates/yml.j2 /variables/yml.yml --format=yaml
 
 deploy:
   - provider: script
