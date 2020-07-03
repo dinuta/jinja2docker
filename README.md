@@ -7,7 +7,7 @@
 ## Docker Hub
 https://hub.docker.com/r/dinutac/jinja2docker
 
-[![](https://images.microbadger.com/badges/image/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/dinutac/jinja2docker.svg)](https://microbadger.com/images/dinutac/jinja2docker "Get your own version badge on microbadger.com") ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
+![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/dinutac/jinja2docker/2.1.5) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.5) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 Steps:   
 *  Mount the directory containing your template(s) to the container's **/templates** directory
