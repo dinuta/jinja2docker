@@ -16,8 +16,10 @@ Steps:
 *  In your jinja2 template get OS environment variables plus your inserted environment vars with ```environ('your_env_var')```
 
 ## Supported formats (default)
-
 Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
+
+## Jinja2docker in action on katacoda  
+https://katacoda.com/dinuta/scenarios/jinja2docker
 
 ## Syntax
 
