@@ -34,8 +34,8 @@ dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=jso
 Example 1: 
 ```bash
 docker run --rm 
--v $PWD\inputs\templates:/templates 
--v $PWD\inputs\variables:/variables \
+-v $PWD/inputs/templates:/templates 
+-v $PWD/inputs/variables:/variables \
 -e DATABASE=mysql56 -e IMAGE=latest \
 dinutac/jinja2docker:latest /templates/standalone.j2 /variables/variables.yml --format=yaml > docker-compose.yml
 ```
@@ -43,8 +43,8 @@ dinutac/jinja2docker:latest /templates/standalone.j2 /variables/variables.yml --
 Example 2:
 ```bash
 docker run --rm 
--v $PWD\inputs\templates:/templates 
--v $PWD\inputs\variables:/variables
+-v $PWD/inputs/templates:/templates 
+-v $PWD/inputs/variables:/variables
 dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=json
 ```
 
@@ -83,9 +83,8 @@ If you want to use the custom embedded render you must override the entrypoint w
 Example:
 ```bash
 docker run --rm --entrypoint /scripts/entities/render.py
-    -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
-    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
-    -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
+    -e DATABASE=mysql56 -e IMAGE=latest 
+    dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json
 ```
 
 ## Write your own custom render

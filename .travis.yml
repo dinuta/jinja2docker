@@ -15,6 +15,7 @@ before_install:
 
 install:
   - pip3 install coveralls
+  - pip3 install pytest-cov
 
 before_script:
   - py.test tests/render_test.py --cov=entities
