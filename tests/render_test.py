@@ -1,35 +1,39 @@
 #!/usr/bin/env python3
-import os
 import unittest
 
 import yaml
 
+from entities import render
 from entities.render import Render
 
 
 class RenderTestCase(unittest.TestCase):
 
     def test_json(self):
-        os.environ['TEMPLATE'] = "json.j2"
-        os.environ['VARIABLES'] = "json.json"
-        r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
+        template_path = "./inputs/templates/json.j2"
+        variables_path = "./inputs/variables/json.json"
+        r = Render(template_path=template_path, variables_path=variables_path)
 
-        template = yaml.safe_load(r.rend_template())
-        with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
+        rendered_data = yaml.safe_load(r.rend_template())
+        with open(r.variables_path, closefd=True) as f:
             data = yaml.safe_load(f)
-        self.assertEqual(template.get("os"), data.get("os"), )
-        self.assertEqual(template.get("version"), data.get("version"))
-        self.assertEqual(template.get("installed_apps"), data.get("installed_apps"))
+        self.assertEqual(rendered_data, data)
 
     def test_yml(self):
-        os.environ['TEMPLATE'] = "yml.j2"
-        os.environ['VARIABLES'] = "yml.yml"
-        r = Render(os.environ['TEMPLATE'], os.environ['VARIABLES'])
+        template_path = "./inputs/templates/yml.j2"
+        variables_path = "./inputs/variables/yml.yml"
+        r = Render(template_path=template_path, variables_path=variables_path)
 
-        template = yaml.safe_load(r.rend_template())
-        with open(r.VARS_DIR + "/" + r.variables, closefd=True) as f:
+        rendered_data = yaml.safe_load(r.rend_template())
+        with open(r.variables_path, closefd=True) as f:
             data = yaml.safe_load(f)
-        self.assertEqual(template, data)
+        self.assertEqual(rendered_data, data)
+
+    def test_main_no_parameters(self):
+        try:
+            render.main()
+        except Exception as e:
+            self.assertIsInstance(e, Exception)
 
 
 if __name__ == '__main__':

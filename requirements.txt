@@ -1,9 +1,0 @@
-jinja2-cli[yaml,toml,xml]
-
-flask
-requests
-parameterized
-python-coveralls
-pytest-cov
-flask_swagger_ui
-flask_cors
