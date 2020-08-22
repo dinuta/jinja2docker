@@ -1,0 +1,5 @@
+jinja2-cli[yaml,toml,xml]
+
+coveralls
+pytest-cov
+PyYAML

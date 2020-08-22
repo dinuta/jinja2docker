@@ -14,9 +14,7 @@ before_install:
   - docker build -t dinutac/jinja2docker:latest .
 
 install:
-  - pip3 install coveralls
-  - pip3 install pytest-cov
-  - pip3 install PyYAML
+  - pip3 install -r requirements.txt
 
 before_script:
   - py.test tests/render_test.py --cov=entities
