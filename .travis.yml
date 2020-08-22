@@ -9,6 +9,7 @@ services:
 env:
   #scripts dir host and docker
   DOCKER_SCRIPTS_DIR: /scripts
+  TEMPLATES_DIR: ./inputs/templates
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
