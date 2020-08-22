@@ -1,48 +1,43 @@
 language: python
 
 python:
-  - "3.7"
+  - "3.8"
 
 services:
   - docker
 
 env:
   #scripts dir host and docker
-  SCRIPTS_DIR: tests/
   DOCKER_SCRIPTS_DIR: /scripts
-
-  # unit tests env vars
-  TEMPLATES_DIR: inputs/templates
-  VARS_DIR: inputs/variables
+  TEMPLATES_DIR: ./inputs/templates
 
 before_install:
   - docker build -t dinutac/jinja2docker:latest .
-  - docker-compose up -d
-  - sleep 10
 
 install:
-  - pip install -r requirements.txt
-  - pip3 install coveralls
+  - pip3 install -r requirements.txt
 
 before_script:
-  - py.test $SCRIPTS_DIR/render_test.py --cov=entities
+  - py.test tests/render_test.py --cov=entities
 
 script:
-  - python3 -m unittest discover $SCRIPTS_DIR "*_test.py"
-  - docker exec jinja2docker python3 -m unittest discover $DOCKER_SCRIPTS_DIR "render_test.py"
-  - docker-compose down -v
+  - python3 -m unittest discover tests/ "*_test.py"
 
   #override entrypoint for custom render
   - docker run --rm --entrypoint /scripts/entities/render.py
     -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
-    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables  -e TEMPLATE=standalone.j2
-    -e VARIABLES=variables.yml -e DATABASE=mysql56 -e IMAGE=latest dinutac/jinja2docker:latest
+    -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
+    -e DATABASE=mysql56
+    -e IMAGE=latest
+    dinutac/jinja2docker:latest
+    standalone.j2 /variables/variables.yml
 
   #default render is jinja2-cli
   - docker run --rm
-    -e DATABASE=mysql56 -e IMAGE=latest
     -v $TRAVIS_BUILD_DIR/inputs/templates:/templates
     -v $TRAVIS_BUILD_DIR/inputs/variables:/variables
+    -e DATABASE=mysql56
+    -e IMAGE=latest
     dinutac/jinja2docker:latest
     /templates/standalone.j2 /variables/variables.yml --format=yml
 
