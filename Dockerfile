@@ -1,15 +1,12 @@
-FROM alpine:3.12
+FROM alpine:3.11
 
+# Install python3 and other deps
 RUN apk add --no-cache python3
 RUN pip3 install pip==20.2.2 --no-cache
 
 # Create folders
 RUN mkdir /templates/
 RUN mkdir /variables/
-
-# Expose some volumes
-VOLUME ["/templates"]
-VOLUME ["/variables"]
 
 # Set needed env vars
 ENV SCRIPTS_DIR /scripts
