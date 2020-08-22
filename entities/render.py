@@ -14,8 +14,8 @@ import yaml
 class Render:
     TEMPLATES_DIR = os.environ.get('TEMPLATES_DIR') if os.environ.get('TEMPLATES_DIR') is not None else "/templates"
 
-    def __init__(self, template_path=None, variables_path=None):
-        self.template_path = template_path
+    def __init__(self, template_name=None, variables_path=None):
+        self.template_name = template_name
         self.variables_path = variables_path
         self.env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(self.TEMPLATES_DIR),
@@ -34,7 +34,7 @@ class Render:
         self.env.globals["environ"] = lambda key: os.environ.get(key)
 
         try:
-            rendered = self.env.get_template(self.template_path).render(data)
+            rendered = self.env.get_template(self.template_name).render(data)
         except Exception as e:
             raise e
 

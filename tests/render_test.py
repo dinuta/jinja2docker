@@ -10,9 +10,9 @@ from entities.render import Render
 class RenderTestCase(unittest.TestCase):
 
     def test_json(self):
-        template_path = "./inputs/templates/json.j2"
+        template_name = "json.j2"
         variables_path = "./inputs/variables/json.json"
-        r = Render(template_path=template_path, variables_path=variables_path)
+        r = Render(template_name=template_name, variables_path=variables_path)
 
         rendered_data = yaml.safe_load(r.rend_template())
         with open(r.variables_path, closefd=True) as f:
@@ -20,9 +20,9 @@ class RenderTestCase(unittest.TestCase):
         self.assertEqual(rendered_data, data)
 
     def test_yml(self):
-        template_path = "./inputs/templates/yml.j2"
+        template_name = "yml.j2"
         variables_path = "./inputs/variables/yml.yml"
-        r = Render(template_path=template_path, variables_path=variables_path)
+        r = Render(template_name=template_name, variables_path=variables_path)
 
         rendered_data = yaml.safe_load(r.rend_template())
         with open(r.variables_path, closefd=True) as f:
