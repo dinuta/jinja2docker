@@ -7,7 +7,7 @@
 ## Docker Hub
 https://hub.docker.com/r/dinutac/jinja2docker
 
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.5) ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/dinutac/jinja2docker/2.1.5) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.5) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.6) ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/dinutac/jinja2docker/2.1.6) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.6) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 Steps:   
 *  Mount the directory containing your template(s) to the container's **/templates** directory
@@ -83,8 +83,8 @@ If you want to use the custom embedded render you must override the entrypoint w
 Example:
 ```bash
 docker run --rm --entrypoint /scripts/entities/render.py
-    -e DATABASE=mysql56 -e IMAGE=latest 
-    dinutac/jinja2docker:latest json.j2 /variables/json.json
+-e DATABASE=mysql56 -e IMAGE=latest 
+dinutac/jinja2docker:latest json.j2 /variables/json.json
 ```
 *The call is similar to jinja2-cli default render, but the template is called by name, not by path. The template must exist in /templates dir.*
 
@@ -92,12 +92,5 @@ docker run --rm --entrypoint /scripts/entities/render.py
 If you want to write your own custom jinja2 render:
 
 -  Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
--  Verify the Dockerfile and add the needed python packages (requirements.txt).
-
-# Latest updates  
-
-### Added flask restful server
-
-[Info in wiki](https://github.com/dinuta/jinja2docker/wiki)  
-[Collection](https://documenter.getpostman.com/view/2360061/SVYjUN7j)    
+-  Verify the Dockerfile and add the needed python packages (requirements.txt).    
   
