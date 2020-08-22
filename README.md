@@ -84,8 +84,9 @@ Example:
 ```bash
 docker run --rm --entrypoint /scripts/entities/render.py
     -e DATABASE=mysql56 -e IMAGE=latest 
-    dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json
+    dinutac/jinja2docker:latest json.j2 /variables/json.json
 ```
+*The call is similar to jinja2-cli default render, but the template is called by name, not by path. The template must exist in /templates dir.*
 
 ## Write your own custom render
 If you want to write your own custom jinja2 render:

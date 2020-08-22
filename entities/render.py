@@ -4,25 +4,37 @@ from __future__ import (absolute_import, division, print_function)
 
 __metaclass__ = type
 
+import os
 import sys
 
+import jinja2
 import yaml
-from jinja2 import Template
 
 
 class Render:
+    TEMPLATES_DIR = os.environ.get('TEMPLATES_DIR') if os.environ.get('TEMPLATES_DIR') is not None else "/templates"
+
     def __init__(self, template_path=None, variables_path=None):
         self.template_path = template_path
         self.variables_path = variables_path
+        self.env = jinja2.Environment(
+            loader=jinja2.FileSystemLoader(self.TEMPLATES_DIR),
+            extensions=['jinja2.ext.autoescape', 'jinja2.ext.do', 'jinja2.ext.loopcontrols', 'jinja2.ext.with_'],
+            autoescape=True,
+            trim_blocks=True)
+
+    def yaml_filter(self, value):
+        return yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)
 
     def rend_template(self):
         with open(self.variables_path, closefd=True) as f:
             data = yaml.safe_load(f)
-        with open(self.template_path, closefd=True) as f:
-            template = f.read()
+
+        self.env.filters['yaml'] = self.yaml_filter
+        self.env.globals["environ"] = lambda key: os.environ.get(key)
 
         try:
-            rendered = Template(template).render(data)
+            rendered = self.env.get_template(self.template_path).render(data)
         except Exception as e:
             raise e
 

@@ -29,7 +29,7 @@ script:
     -e DATABASE=mysql56
     -e IMAGE=latest
     dinutac/jinja2docker:latest
-    /templates/standalone.j2 /variables/variables.yml
+    standalone.j2 /variables/variables.yml
 
   #default render is jinja2-cli
   - docker run --rm

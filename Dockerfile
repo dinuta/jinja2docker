@@ -10,6 +10,7 @@ RUN mkdir /variables/
 
 # Set needed env vars
 ENV SCRIPTS_DIR /scripts
+ENV TEMPLATES_DIR /templates
 
 # Copy extra scripts: embedded render and main flask service
 COPY entities/render.py $SCRIPTS_DIR/entities/render.py
