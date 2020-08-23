@@ -12,7 +12,7 @@ RUN mkdir /variables/
 ENV SCRIPTS_DIR /scripts
 ENV TEMPLATES_DIR /templates
 
-# Copy extra scripts: embedded render and main flask service
+# Copy extra scripts: embedded render
 COPY entities/render.py $SCRIPTS_DIR/entities/render.py
 
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
