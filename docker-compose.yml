@@ -11,7 +11,7 @@ services:
       limit: 'sky' #example env var inserted. you can read it with environ('limit')
     volumes:
       - ./inputs/templates:/templates
-      - ./inputs/variables_path:/variables_path
+      - ./inputs/variables:/variables
       - ./:/home/dev/scripts/
     ports:
       - "8080:8080"
