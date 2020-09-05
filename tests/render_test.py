@@ -15,6 +15,7 @@ class RenderTestCase(unittest.TestCase):
         render = Render(template_name=template_name, variables_path=variables_path)
 
         rendered_data, data = RenderTestCase.get_data_and_rendered_data(render)
+
         self.assertEqual(rendered_data, data)
 
     def test_yml(self):
@@ -22,7 +23,8 @@ class RenderTestCase(unittest.TestCase):
         variables_path = "./inputs/variables/yml.yml"
         r = Render(template_name=template_name, variables_path=variables_path)
 
-        rendered_data, data = self.get_data_and_rendered_data(r)
+        rendered_data, data = RenderTestCase.get_data_and_rendered_data(r)
+
         self.assertEqual(rendered_data, data)
 
     def get_data_and_rendered_data(r):
