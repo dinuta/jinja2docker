@@ -31,7 +31,7 @@ class Render:
             data = yaml.safe_load(f)
 
         self.env.filters['yaml'] = self.yaml_filter
-        self.env.globals["environ"] = os.environ
+        self.env.globals["environ"] = lambda key: os.environ.get(key)
 
         try:
             rendered = self.env.get_template(self.template_name).render(data)
