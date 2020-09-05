@@ -17,7 +17,7 @@ class RenderTestCase(unittest.TestCase):
         rendered_data, data = self.get_data_and_rendered_data(r)
         self.assertEqual(rendered_data, data)
 
-    def get_data_and_rendered_data(self, r):
+    def get_data_and_rendered_data(r):
         rendered_data = yaml.safe_load(r.rend_template())
         with open(r.variables_path, closefd=True) as f:
             data = yaml.safe_load(f)
