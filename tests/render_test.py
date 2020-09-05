@@ -12,11 +12,10 @@ class RenderTestCase(unittest.TestCase):
     def test_json(self):
         template_name = "json.j2"
         variables_path = "./inputs/variables/json.json"
-        r = Render(template_name=template_name, variables_path=variables_path)
+        render = Render(template_name=template_name, variables_path=variables_path)
 
-        rendered_data = yaml.safe_load(r.rend_template())
-        with open(r.variables_path, closefd=True) as f:
-            data = yaml.safe_load(f)
+        rendered_data, data = RenderTestCase.get_data_and_rendered_data(render)
+
         self.assertEqual(rendered_data, data)
 
     def test_yml(self):
@@ -24,10 +23,15 @@ class RenderTestCase(unittest.TestCase):
         variables_path = "./inputs/variables/yml.yml"
         r = Render(template_name=template_name, variables_path=variables_path)
 
+        rendered_data, data = RenderTestCase.get_data_and_rendered_data(r)
+
+        self.assertEqual(rendered_data, data)
+
+    def get_data_and_rendered_data(r):
         rendered_data = yaml.safe_load(r.rend_template())
         with open(r.variables_path, closefd=True) as f:
             data = yaml.safe_load(f)
-        self.assertEqual(rendered_data, data)
+        return rendered_data, data
 
     def test_main_no_parameters(self):
         try:

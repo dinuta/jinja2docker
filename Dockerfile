@@ -16,6 +16,6 @@ ENV TEMPLATES_DIR /templates
 COPY entities/render.py $SCRIPTS_DIR/entities/render.py
 
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
-RUN pip3 install jinja2-cli[yaml,toml,xml]
+RUN pip3 install jinja2-cli[yaml,toml,xml]==0.7.0
 
 ENTRYPOINT ["jinja2"]
