@@ -23,7 +23,7 @@ class Render:
             autoescape=True,
             trim_blocks=True)
 
-    def yaml_filter(self, value):
+    def yaml_filter(value):
         return yaml.dump(value, Dumper=yaml.RoundTripDumper, indent=4)
 
     def rend_template(self):
@@ -31,7 +31,7 @@ class Render:
             data = yaml.safe_load(f)
 
         self.env.filters['yaml'] = self.yaml_filter
-        self.env.globals["environ"] = lambda key: os.environ.get(key)
+        self.env.globals["environ"] = os.environ
 
         try:
             rendered = self.env.get_template(self.template_name).render(data)
