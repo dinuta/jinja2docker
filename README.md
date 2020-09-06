@@ -18,6 +18,11 @@ Steps:
 *   In your jinja2 template get OS environment variables plus your inserted environment vars with ```environ('your_env_var')```
 
 ## Supported formats (default)
+*   YAML
+*   JSON
+*   XML
+*   TOML
+
 Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
 ## Docker image in action on katacoda  
@@ -79,8 +84,8 @@ Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ## Embedded custom render
 
 If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```. It supports:
-*   yaml
-*   json
+*   YAML
+*   JSON
 
 Example:
 ```bash
