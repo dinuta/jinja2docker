@@ -25,9 +25,6 @@ Steps:
 
 Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
-## Docker image in action on katacoda  
-[Katacoda scenario](https://katacoda.com/dinuta/scenarios/jinja2docker)
-
 ## Syntax
 
 ```bash
