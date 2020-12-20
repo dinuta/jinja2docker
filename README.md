@@ -6,10 +6,14 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9754bb39c4145c3818920509bc70a3e)](https://www.codacy.com/manual/dinuta/jinja2docker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dinuta/jinja2docker&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/71ec25f732f6c9a753ce/maintainability)](https://codeclimate.com/github/dinuta/jinja2docker/maintainability)
 
-## Docker Hub
-[Docker Hub Image](https://hub.docker.com/r/dinutac/jinja2docker)
+## Docker Hub (obsolete, please use Github docker image)
+[Docker Hub Image](https://hub.docker.com/r/dinutac/jinja2docker)  
 
 ![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.6) ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/dinutac/jinja2docker/2.1.6) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.6) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
+
+## Github docker image
+Please use the image stored on GitHub docker registry. Docker hub enforced [rate limits](https://www.docker.com/increase-rate-limits) starting with November 2020.  
+[Github Docker Image as package](https://github.com/dinuta/jinja2docker/packages/546841)
 
 Steps:   
 *   Mount the directory containing your template(s) to the container's **/templates** directory
