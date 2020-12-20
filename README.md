@@ -15,7 +15,7 @@
 Please use the image stored on GitHub docker registry. Docker hub enforced [rate limits](https://www.docker.com/increase-rate-limits) starting with November 2020.  
 [Github Docker Image as package](https://github.com/dinuta/jinja2docker/packages/546841)
 
-Steps:   
+## Steps to use   
 *   Mount the directory containing your template(s) to the container's **/templates** directory
 *   Mount the directory containing your variables file(s) directory **/variables**
 *   Pass needed env vars (any number)
