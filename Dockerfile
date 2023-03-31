@@ -1,8 +1,7 @@
-FROM alpine:3.11
+FROM alpine:3.17.3
 
-# Install python3 and other deps
-RUN apk add --no-cache python3
-RUN pip3 install pip==20.2.2 --no-cache
+# Install python3 and other dependencies
+RUN apk add --no-cache python3 py3-pip
 
 # Create folders
 RUN mkdir /templates/
@@ -16,6 +15,6 @@ ENV TEMPLATES_DIR /templates
 COPY entities/render.py $SCRIPTS_DIR/entities/render.py
 
 RUN chmod +x $SCRIPTS_DIR/entities/render.py
-RUN pip3 install jinja2-cli[yaml,toml,xml]==0.7.0
+RUN pip3 install jinja2-cli[yaml,toml,xml,hjson,json5]==0.8.2
 
 ENTRYPOINT ["jinja2"]

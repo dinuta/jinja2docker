@@ -26,6 +26,8 @@ Docker hub enforced [rate limits](https://www.docker.com/increase-rate-limits) s
 *   JSON
 *   XML
 *   TOML
+*   HJSON
+*   JSON5
 
 Check [jinja2-cli](https://github.com/mattrobenolt/jinja2-cli) commands for all supported formats.  
 
