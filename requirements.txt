@@ -1,5 +1,0 @@
-jinja2-cli[yaml,toml,xml,hjson,json5]==0.8.2
-
-coveralls
-pytest-cov
-PyYAML

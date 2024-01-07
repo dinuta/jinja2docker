@@ -1,20 +1,16 @@
-FROM alpine:3.17.3
+FROM alpine:3.19.0
 
-# Install python3 and other dependencies
-RUN apk add --no-cache python3 py3-pip
+# Set env vars
+ENV TEMPLATES_DIR /templates
+ENV VARIABLES_DIR /variables
+
 
 # Create folders
-RUN mkdir /templates/
-RUN mkdir /variables/
+RUN mkdir $TEMPLATES_DIR
+RUN mkdir $VARIABLES_DIR
 
-# Set needed env vars
-ENV SCRIPTS_DIR /scripts
-ENV TEMPLATES_DIR /templates
+RUN apk add --no-cache py3-pip
 
-# Copy extra scripts: embedded render
-COPY entities/render.py $SCRIPTS_DIR/entities/render.py
-
-RUN chmod +x $SCRIPTS_DIR/entities/render.py
-RUN pip3 install jinja2-cli[yaml,toml,xml,hjson,json5]==0.8.2
+RUN pip3 install jinja2-cli[yaml,toml,xml,hjson,json5]==0.8.2 --break-system-packages
 
 ENTRYPOINT ["jinja2"]
