@@ -3,7 +3,7 @@
 ## Docker Hub
 [Docker Hub Image](https://hub.docker.com/r/dinutac/jinja2docker)  
 
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.7) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.7) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.8) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.8) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 ## Github docker image
 Docker hub enforced [rate limits](https://www.docker.com/increase-rate-limits) starting with November 2020.  
