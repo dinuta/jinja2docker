@@ -1,15 +1,9 @@
 # Jinja2 templating with Docker
 
-## Build & Coverage
-[![Build Status](https://travis-ci.org/dinuta/jinja2docker.svg?branch=master)](https://travis-ci.org/dinuta/jinja2docker)
-[![Coverage Status](https://coveralls.io/repos/github/dinuta/jinja2docker/badge.svg?branch=master)](https://coveralls.io/github/dinuta/jinja2docker?branch=master)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9754bb39c4145c3818920509bc70a3e)](https://www.codacy.com/manual/dinuta/jinja2docker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dinuta/jinja2docker&amp;utm_campaign=Badge_Grade)
-[![Maintainability](https://api.codeclimate.com/v1/badges/71ec25f732f6c9a753ce/maintainability)](https://codeclimate.com/github/dinuta/jinja2docker/maintainability)
-
 ## Docker Hub
 [Docker Hub Image](https://hub.docker.com/r/dinutac/jinja2docker)  
 
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.6) ![MicroBadger Layers (tag)](https://img.shields.io/microbadger/layers/dinutac/jinja2docker/2.1.6) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.6) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/dinutac/jinja2docker/2.1.7) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/dinutac/jinja2docker/2.1.7) ![](https://img.shields.io/docker/pulls/dinutac/jinja2docker.svg)
 
 ## Github docker image
 Docker hub enforced [rate limits](https://www.docker.com/increase-rate-limits) starting with November 2020.  
@@ -43,8 +37,8 @@ dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=jso
 
 Example 1: 
 ```bash
-docker run --rm 
--v $PWD/inputs/templates:/templates 
+docker run --rm \
+-v $PWD/inputs/templates:/templates \
 -v $PWD/inputs/variables:/variables \
 -e DATABASE=mysql56 -e IMAGE=latest \
 dinutac/jinja2docker:latest /templates/standalone.j2 /variables/variables.yml --format=yaml > docker-compose.yml
@@ -52,9 +46,9 @@ dinutac/jinja2docker:latest /templates/standalone.j2 /variables/variables.yml --
 
 Example 2:
 ```bash
-docker run --rm 
--v $PWD/inputs/templates:/templates 
--v $PWD/inputs/variables:/variables
+docker run --rm \
+-v $PWD/inputs/templates:/templates \
+-v $PWD/inputs/variables:/variables \
 dinutac/jinja2docker:latest /templates/json.j2 /variables/json.json --format=json
 ```
 
@@ -83,24 +77,4 @@ Flavour: CentOS
 
 Path: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
-
-## Embedded custom render
-
-If you want to use the custom embedded render you must override the entrypoint with ```/scripts/entities/render.py```. It supports:
-*   YAML
-*   JSON
-
-Example:
-```bash
-docker run --rm --entrypoint /scripts/entities/render.py
--e DATABASE=mysql56 -e IMAGE=latest 
-dinutac/jinja2docker:latest json.j2 /variables/json.json
-```
-*The call is similar to jinja2-cli default render, but the template is called by name, not by path. The template must exist in /templates dir.*
-
-## Write your own custom render
-If you want to write your own custom jinja2 render:
-
-*   Override the ```render.py``` file (you must use this file name) in **/scripts/entities/render.py** in order to execute your own logic.
-*   Verify the Dockerfile and add the needed python packages (requirements.txt).    
   
